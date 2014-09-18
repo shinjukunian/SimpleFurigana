@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RubyView;
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UITextViewDelegate>
+
+@property IBOutlet UITextView *inputTextView;
+@property IBOutlet RubyView *rubyView;
+
 
 
 @end

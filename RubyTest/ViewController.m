@@ -7,8 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "RubyView.h"
 
-@interface ViewController ()
+
+@import CoreText;
+
+@interface ViewController (){
+ 
+    NSDictionary *attributes;
+    
+}
 
 @end
 
@@ -16,8 +24,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSString *input=@"山田電機はとても高いです。最近忙しいですか？";
+    attributes=@{NSFontAttributeName:[UIFont systemFontOfSize:20]};
+    
+    NSAttributedString *inputAttributed=[[NSAttributedString alloc]initWithString:input attributes:attributes];
+    [self.inputTextView setDelegate:self];
+    [self.inputTextView setAttributedText:inputAttributed];
+    [self.rubyView setStringToTransform:inputAttributed];
 }
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+}
+
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+ 
+    NSString *new=[textView.text stringByReplacingCharactersInRange:range withString:text];
+    NSAttributedString *newAttributed=[[NSAttributedString alloc]initWithString:new attributes:attributes];
+    [self.rubyView setStringToTransform:newAttributed];
+    [self.rubyView setNeedsDisplay];
+        
+    return YES;
+}
+
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
