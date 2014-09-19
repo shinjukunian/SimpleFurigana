@@ -61,7 +61,7 @@
         CGContextTranslateCTM(ctx, 0, ([self bounds]).size.height );
         CGContextScaleCTM(ctx, 1.0, -1.0);
         
-        CGPoint textPosition = CGPointMake(floor(CGRectGetMinX(self.bounds)),
+       /* CGPoint textPosition = CGPointMake(floor(CGRectGetMinX(self.bounds)),
                                            floor(CGRectGetMaxY(self.bounds)));
         CGFloat boundsWidth = CGRectGetWidth(self.bounds);
         
@@ -84,9 +84,25 @@
             CFRelease(line);
         }
         CFRelease(typesetter);
+        CFRelease(rubyStr);*/
+        
+        //seems a lot easier to use a framesetter than manual linebreaks
+        
+        
+        CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(rubyStr);
+        CGPathRef path=CGPathCreateWithRect(self.bounds, NULL);
+        CTFrameRef frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(rubyStr)), path, NULL);
+        CTFrameDraw(frame, context);
+        CFRelease(frame);
+        CFRelease(path);
+        CFRelease(frameSetter);
         CFRelease(rubyStr);
- 
+        
     }
+        
+        
+    
+        
 
 }
 
