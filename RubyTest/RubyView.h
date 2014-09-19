@@ -10,8 +10,21 @@
 
 @interface RubyView : UIView
 
+
+typedef enum{
+    RubyTypeFuriganaRomaji,
+    RubyTypeFurigana,
+    RubyTypeHiraganaOnly,
+    RubyTypeRomajiOnly,
+    RubyTypeNone,
+}RubyType;
+
+
+
 @property CFAttributedStringRef rubyString;
 @property NSAttributedString *stringToTransform;
+@property CGSize intrinsicContentSize;
+@property RubyType type;
 
 
 @end

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6239"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--漢字-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
@@ -18,37 +18,70 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-YS-Mna">
-                                <rect key="frame" x="16" y="28" width="568" height="225"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="56" width="568" height="103"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="225" id="8Mz-Ks-9Y5"/>
+                                    <constraint firstAttribute="height" constant="103" id="w8n-9J-uSY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFX-Of-x76" customClass="RubyView">
-                                <rect key="frame" x="16" y="280" width="568" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-Hf-Yxz">
+                                <rect key="frame" x="16" y="20" width="568" height="29"/>
+                                <segments>
+                                    <segment title="漢字"/>
+                                    <segment title="ひらがな"/>
+                                    <segment title="ふりがな"/>
+                                </segments>
+                                <connections>
+                                    <action selector="transliterationMethodDidChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="zYV-St-nul"/>
+                                </connections>
+                            </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
+                                <rect key="frame" x="16" y="167" width="568" height="413"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="413"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="aae-Ss-w9Z" secondAttribute="trailing" id="HVU-iN-gGN"/>
+                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="centerY" secondItem="dfs-K2-7Dw" secondAttribute="centerY" placeholder="YES" id="NmY-q8-rPW"/>
+                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="top" id="hPa-Lj-0w8"/>
+                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="leading" secondItem="dfs-K2-7Dw" secondAttribute="leading" id="jjs-3U-leO"/>
+                                    <constraint firstAttribute="bottom" secondItem="aae-Ss-w9Z" secondAttribute="bottom" id="uyG-gi-yrt"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="cmc-hO-N4q"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="zFX-Of-x76" secondAttribute="bottom" constant="20" symbolic="YES" id="AnL-17-Ae6"/>
-                            <constraint firstItem="zFX-Of-x76" firstAttribute="top" secondItem="PyN-YS-Mna" secondAttribute="bottom" constant="27" id="dhq-QP-eFn"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="f03-SI-R8b"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="leading" secondItem="zFX-Of-x76" secondAttribute="leading" id="n4F-D0-fId"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="trailing" secondItem="zFX-Of-x76" secondAttribute="trailing" id="wc3-Sy-unx"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="woZ-Co-Kht"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="zuz-UF-yQg"/>
+                            <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="8YJ-vM-m9o"/>
+                            <constraint firstAttribute="centerX" secondItem="fJy-Hf-Yxz" secondAttribute="centerX" id="IkF-hJ-aEC"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="bottom" constant="20" id="Kk2-Yd-Cgl"/>
+                            <constraint firstItem="dfs-K2-7Dw" firstAttribute="leading" secondItem="PyN-YS-Mna" secondAttribute="leading" id="RgB-pn-HyP"/>
+                            <constraint firstItem="dfs-K2-7Dw" firstAttribute="trailing" secondItem="PyN-YS-Mna" secondAttribute="trailing" id="TIA-iD-ecH"/>
+                            <constraint firstItem="fJy-Hf-Yxz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="dbw-xF-9KR"/>
+                            <constraint firstItem="PyN-YS-Mna" firstAttribute="top" secondItem="fJy-Hf-Yxz" secondAttribute="bottom" constant="8" id="kMm-HE-Ire"/>
+                            <constraint firstItem="fJy-Hf-Yxz" firstAttribute="leading" secondItem="PyN-YS-Mna" secondAttribute="leading" id="kpp-YN-USY"/>
+                            <constraint firstItem="PyN-YS-Mna" firstAttribute="width" secondItem="aae-Ss-w9Z" secondAttribute="width" id="mCK-9E-ZKR"/>
+                            <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="PyN-YS-Mna" secondAttribute="trailing" id="s7S-pb-M8K"/>
+                            <constraint firstItem="dfs-K2-7Dw" firstAttribute="top" secondItem="PyN-YS-Mna" secondAttribute="bottom" constant="8" id="tbH-pL-1Qf"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="漢字" id="RzY-mY-BBB"/>
                     <connections>
                         <outlet property="inputTextView" destination="PyN-YS-Mna" id="hkp-Ks-M7s"/>
-                        <outlet property="rubyView" destination="zFX-Of-x76" id="s2Q-wc-kV3"/>
+                        <outlet property="rubyView" destination="aae-Ss-w9Z" id="PVI-yO-YtJ"/>
+                        <outlet property="scrollView" destination="dfs-K2-7Dw" id="OYP-Uv-TnR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="60" y="1053"/>
         </scene>
     </scenes>
 </document>

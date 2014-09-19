@@ -15,6 +15,9 @@
 		B70A5BA519CB041100079CDF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70A5BA319CB041100079CDF /* LaunchScreen.xib */; };
 		B70A5BB119CB041100079CDF /* RubyTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B70A5BB019CB041100079CDF /* RubyTestTests.m */; };
 		B72777DF19CB15EC000C973B /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
+		B72777ED19CBCC52000C973B /* ActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777EC19CBCC52000C973B /* ActionViewController.m */; };
+		B72777EF19CBCC52000C973B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B72777EE19CBCC52000C973B /* MainInterface.storyboard */; };
+		B72777F219CBCC52000C973B /* RubyAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B72777E719CBCC52000C973B /* RubyAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +29,35 @@
 			remoteGlobalIDString = B70A5B9019CB041100079CDF;
 			remoteInfo = RubyTest;
 		};
+		B72777F019CBCC52000C973B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B70A5B8919CB041100079CDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B72777E619CBCC52000C973B;
+			remoteInfo = RubyAction;
+		};
+		B72777F319CBCC52000C973B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B70A5B8919CB041100079CDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B72777E619CBCC52000C973B;
+			remoteInfo = RubyAction;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B72777F819CBCC52000C973B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B72777F219CBCC52000C973B /* RubyAction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B70A5B9119CB041100079CDF /* RubyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +75,11 @@
 		B70A5BB019CB041100079CDF /* RubyTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RubyTestTests.m; sourceTree = "<group>"; };
 		B72777DD19CB15EC000C973B /* NSString+Japanese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Japanese.h"; sourceTree = "<group>"; };
 		B72777DE19CB15EC000C973B /* NSString+Japanese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Japanese.m"; sourceTree = "<group>"; };
+		B72777E719CBCC52000C973B /* RubyAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RubyAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B72777EA19CBCC52000C973B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B72777EB19CBCC52000C973B /* ActionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionViewController.h; sourceTree = "<group>"; };
+		B72777EC19CBCC52000C973B /* ActionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionViewController.m; sourceTree = "<group>"; };
+		B72777EE19CBCC52000C973B /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		B7E18D0619CB0A99005CEB0B /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
 		B7E18D0719CB0A99005CEB0B /* RubyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +99,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B72777E419CBCC52000C973B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -73,6 +116,7 @@
 				B72777DE19CB15EC000C973B /* NSString+Japanese.m */,
 				B70A5B9319CB041100079CDF /* RubyTest */,
 				B70A5BAD19CB041100079CDF /* RubyTestTests */,
+				B72777E819CBCC52000C973B /* RubyAction */,
 				B70A5B9219CB041100079CDF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +126,7 @@
 			children = (
 				B70A5B9119CB041100079CDF /* RubyTest.app */,
 				B70A5BAA19CB041100079CDF /* RubyTestTests.xctest */,
+				B72777E719CBCC52000C973B /* RubyAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +174,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B72777E819CBCC52000C973B /* RubyAction */ = {
+			isa = PBXGroup;
+			children = (
+				B72777EB19CBCC52000C973B /* ActionViewController.h */,
+				B72777EC19CBCC52000C973B /* ActionViewController.m */,
+				B72777EE19CBCC52000C973B /* MainInterface.storyboard */,
+				B72777E919CBCC52000C973B /* Supporting Files */,
+			);
+			path = RubyAction;
+			sourceTree = "<group>";
+		};
+		B72777E919CBCC52000C973B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B72777EA19CBCC52000C973B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,10 +203,13 @@
 				B70A5B8D19CB041100079CDF /* Sources */,
 				B70A5B8E19CB041100079CDF /* Frameworks */,
 				B70A5B8F19CB041100079CDF /* Resources */,
+				B72777F819CBCC52000C973B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B72777F119CBCC52000C973B /* PBXTargetDependency */,
+				B72777F419CBCC52000C973B /* PBXTargetDependency */,
 			);
 			name = RubyTest;
 			productName = RubyTest;
@@ -167,6 +234,23 @@
 			productReference = B70A5BAA19CB041100079CDF /* RubyTestTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B72777E619CBCC52000C973B /* RubyAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B72777F519CBCC52000C973B /* Build configuration list for PBXNativeTarget "RubyAction" */;
+			buildPhases = (
+				B72777E319CBCC52000C973B /* Sources */,
+				B72777E419CBCC52000C973B /* Frameworks */,
+				B72777E519CBCC52000C973B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RubyAction;
+			productName = RubyAction;
+			productReference = B72777E719CBCC52000C973B /* RubyAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,6 +266,9 @@
 					B70A5BA919CB041100079CDF = {
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = B70A5B9019CB041100079CDF;
+					};
+					B72777E619CBCC52000C973B = {
+						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
@@ -200,6 +287,7 @@
 			targets = (
 				B70A5B9019CB041100079CDF /* RubyTest */,
 				B70A5BA919CB041100079CDF /* RubyTestTests */,
+				B72777E619CBCC52000C973B /* RubyAction */,
 			);
 		};
 /* End PBXProject section */
@@ -219,6 +307,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B72777E519CBCC52000C973B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B72777EF19CBCC52000C973B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +341,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B72777E319CBCC52000C973B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B72777ED19CBCC52000C973B /* ActionViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -252,6 +356,16 @@
 			isa = PBXTargetDependency;
 			target = B70A5B9019CB041100079CDF /* RubyTest */;
 			targetProxy = B70A5BAB19CB041100079CDF /* PBXContainerItemProxy */;
+		};
+		B72777F119CBCC52000C973B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B72777E619CBCC52000C973B /* RubyAction */;
+			targetProxy = B72777F019CBCC52000C973B /* PBXContainerItemProxy */;
+		};
+		B72777F419CBCC52000C973B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B72777E619CBCC52000C973B /* RubyAction */;
+			targetProxy = B72777F319CBCC52000C973B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -405,6 +519,32 @@
 			};
 			name = Release;
 		};
+		B72777F619CBCC52000C973B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RubyAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B72777F719CBCC52000C973B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RubyAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -431,6 +571,15 @@
 			buildConfigurations = (
 				B70A5BB819CB041100079CDF /* Debug */,
 				B70A5BB919CB041100079CDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B72777F519CBCC52000C973B /* Build configuration list for PBXNativeTarget "RubyAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B72777F619CBCC52000C973B /* Debug */,
+				B72777F719CBCC52000C973B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

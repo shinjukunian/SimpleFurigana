@@ -48,6 +48,7 @@ typedef enum{
 
 -(NSDictionary*)hiraganaReplacementsForString;
 
+-(NSDictionary*)romajiReplacementsForString;
 
 // very RUDIMENTARY 'sounds like' comparison of two japanese strings
 // compares the the reciever to the passed string

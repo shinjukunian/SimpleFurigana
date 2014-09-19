@@ -300,11 +300,14 @@ char_class getCharClass(unichar c){
     NSMutableString* kanjiFree = [[NSMutableString alloc]init];
     
     // create a tokenizer to enumerate by WORD
+    NSLocale *locale= [[NSLocale alloc]initWithLocaleIdentifier:@"ja_JP"];
+    CFLocaleRef loc=(__bridge CFLocaleRef)(locale);
+
     CFStringTokenizerRef tok = CFStringTokenizerCreate(NULL,
                                                        (CFStringRef)self,
                                                        CFRangeMake(0,self.length),
-                                                       kCFStringTokenizerUnitWord,
-                                                       NULL);
+                                                       kCFStringTokenizerUnitWordBoundary,
+                                                       loc);
     // goto the first token in the string
     CFStringTokenizerTokenType result  =CFStringTokenizerAdvanceToNextToken(tok);
     
@@ -390,6 +393,58 @@ char_class getCharClass(unichar c){
     
     
 }
+
+
+
+-(NSDictionary*)romajiReplacementsForString{
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    
+    // create a tokenizer to enumerate by WORD
+    NSLocale *locale= [[NSLocale alloc]initWithLocaleIdentifier:@"ja_JP"];
+    CFLocaleRef loc=(__bridge CFLocaleRef)(locale);
+    
+    CFStringTokenizerRef tok = CFStringTokenizerCreate(NULL,
+                                                       (CFStringRef)self,
+                                                       CFRangeMake(0,self.length),
+                                                       kCFStringTokenizerUnitWordBoundary,
+                                                       loc);
+    // goto the first token in the string
+    CFStringTokenizerTokenType result  =CFStringTokenizerAdvanceToNextToken(tok);
+    
+    // enumerate the string
+    while(result !=kCFStringTokenizerTokenNone){
+        
+        CFRange currentRange = CFStringTokenizerGetCurrentTokenRange(tok);
+        NSString* subString = [self substringWithRange:NSMakeRange(currentRange.location, currentRange.length)];
+        
+        // check the type of the substring
+        SLGJapaneseStringType type = [[self class]japaneseStringTypeForString:subString];
+        
+        
+        // for kanji or strings with a combination(kanij+hiragana) of characters convert to hirgana
+        if(type == SLGJapaneseStringTypeKanji || type == SLGJapaneseStringTypeCompound || type==SLGJapaneseStringTypeKatakana || type==SLGJapaneseStringTypeHiragana){
+            CFTypeRef cTypeRef =  CFStringTokenizerCopyCurrentTokenAttribute(tok,kCFStringTokenizerAttributeLatinTranscription);
+            NSString *latin=[NSString stringWithFormat:@"%@",cTypeRef];
+            NSRange range=NSMakeRange(currentRange.location, currentRange.length);
+            [dict setObject:latin forKey:[NSValue valueWithRange:range]];
+            CFRelease(cTypeRef);
+        }
+        else{
+            
+        }
+        
+        result =CFStringTokenizerAdvanceToNextToken(tok);
+    }
+    
+    CFRelease(tok);
+    
+    return [dict copy];
+    
+    
+}
+
+
 
 
 
