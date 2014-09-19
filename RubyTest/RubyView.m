@@ -13,7 +13,7 @@
 
 @implementation RubyView
 
-//http://dev.classmethod.jp/references/ios8-ctrubyannotationref/
+// inspired by http://dev.classmethod.jp/references/ios8-ctrubyannotationref/
 
 
 -(CFAttributedStringRef)furiganaAttributedString:(NSAttributedString*) string{
@@ -21,25 +21,25 @@
     CFAttributedStringRef input=(__bridge CFAttributedStringRef)(string);
     NSDictionary *furiganaDict=[string.string hiraganaReplacementsForString];
        
-    return [self attributedString:input furiganaRanges:furiganaDict];
+    return [self createAttributedString:input furiganaRanges:furiganaDict];
 }
 
-- (CFAttributedStringRef)attributedString:(CFAttributedStringRef)string furiganaRanges:(NSDictionary*)furigana
+- (CFAttributedStringRef)createAttributedString:(CFAttributedStringRef)string furiganaRanges:(NSDictionary*)furigana
 {
     CFMutableAttributedStringRef stringMutable=CFAttributedStringCreateMutableCopy(NULL, CFAttributedStringGetLength(string), string);
-   // CFDictionaryRef inputAttributes=CFAttributedStringGetAttributes(string,0 , NULL);
-    
     for (NSValue *value in furigana.keyEnumerator) {
         NSRange range=value.rangeValue;
         NSString *string=[furigana objectForKey:value];
         CFStringRef furigana[kCTRubyPositionCount] = {(__bridge CFStringRef)string, NULL, NULL, NULL};
-        CTRubyAnnotationRef rubyRef = CTRubyAnnotationCreate(kCTRubyAlignmentAuto, kCTRubyOverhangAuto, 0.5, furigana);
+        CTRubyAnnotationRef rubyRef = CTRubyAnnotationCreate(kCTRubyAlignmentAuto, kCTRubyOverhangNone, 0.5, furigana);
         CFRange r=CFRangeMake(range.location, range.length);
         CFAttributedStringSetAttribute(stringMutable, r, kCTRubyAnnotationAttributeName, rubyRef);
+        CFRelease(rubyRef);
     }
     
     CFAttributedStringRef rubyString=CFAttributedStringCreateCopy(NULL, stringMutable);
     CFRelease(stringMutable);
+    
     return rubyString;
     
 }
@@ -50,9 +50,7 @@
 - (void)drawRect:(CGRect)rect {
     
     if (self.stringToTransform.length>0) {
-        
-        
-        
+
         CFAttributedStringRef rubyStr=[self furiganaAttributedString:self.stringToTransform];
         
         CGContextRef context = UIGraphicsGetCurrentContext();
@@ -86,11 +84,11 @@
             CFRelease(line);
         }
         CFRelease(typesetter);
-        
+        CFRelease(rubyStr);
  
     }
 
-  }
+}
 
 
 @end

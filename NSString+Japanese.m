@@ -375,6 +375,7 @@ char_class getCharClass(unichar c){
          //   NSString* hiragana = [subString stringByTransliteratingJapaneseToHiragana];
             NSRange range=NSMakeRange(currentRange.location, currentRange.length);
             [dict setObject:hiragana forKey:[NSValue valueWithRange:range]];
+            CFRelease(cTypeRef);
         }
         else{
            

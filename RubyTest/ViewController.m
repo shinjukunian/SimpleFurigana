@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *input=@"山田電機はとても高いです。最近忙しいですか？";
+    NSString *input=@"山田電機はとても高いです。\r最近忙しいですか？";
     attributes=@{NSFontAttributeName:[UIFont systemFontOfSize:20]};
     
     NSAttributedString *inputAttributed=[[NSAttributedString alloc]initWithString:input attributes:attributes];
