@@ -42,7 +42,15 @@
     [super viewWillAppear:animated];
 
   //  [self.rubyView sizeToFit];
-   
+    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
+    if ([pasteBoard containsPasteboardTypes:UIPasteboardTypeListString]) {
+        NSArray *array=[pasteBoard strings];
+        NSString *string=[array componentsJoinedByString:@""];
+        if (string.length>0) {
+            NSAttributedString *att=[[NSAttributedString alloc]initWithString:string attributes:attributes];
+            [self.inputTextView setAttributedText:att];
+        }
+    }
        
     
 }
