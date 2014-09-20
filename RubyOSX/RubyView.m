@@ -139,7 +139,7 @@
     
     numberOfPages=0;
     while (fitrange.location+fitrange.length<stringLength) {
-        CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, stringRange, NULL, constraints, &fitrange);
+        CTFramesetterSuggestFrameSizeWithConstraints(framesetter, stringRange, NULL, constraints, &fitrange);
         stringRange.location=fitrange.location+fitrange.length;
         stringRange.length=stringLength-stringRange.location;
         numberOfPages+=1;
@@ -180,7 +180,7 @@
             CFRange fitrange=CFRangeMake(0, 0);
             NSUInteger page=0;
             while (fitrange.location+fitrange.length<stringLength) {
-                CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, stringRange, NULL, constraints, &fitrange);
+                CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, stringRange, NULL, constraints, &fitrange);
                 page+=1;
                 if (page==currentPage) {
                     break;
@@ -211,6 +211,7 @@
         
         
         }
+        
         else{
         
             [[NSGraphicsContext currentContext] saveGraphicsState];

@@ -30,6 +30,7 @@
     [self.scrollView setBackgroundColor:[NSColor whiteColor]];
     [self.scrollView setDrawsBackground:YES];
     [self.rubyView invalidateIntrinsicContentSize];
+
     
     
     
