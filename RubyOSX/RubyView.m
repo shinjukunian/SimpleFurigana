@@ -219,7 +219,7 @@
             CGContextSetTextMatrix(context, CGAffineTransformIdentity);
        
             CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-            CGPathRef path=CGPathCreateWithRect(self.bounds, NULL);
+            CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 10, 10), NULL);
             CTFrameRef frame;
             if (self.orientation==RubyVerticalText) {
                 NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};

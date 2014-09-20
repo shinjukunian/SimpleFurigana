@@ -65,15 +65,17 @@
                                     <rect key="frame" x="1" y="1" width="166" height="79"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view verticalHuggingPriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="aBj-or-C5w" customClass="RubyView">
-                                            <rect key="frame" x="10" y="0.0" width="542" height="227"/>
+                                        <view translatesAutoresizingMaskIntoConstraints="NO" id="aBj-or-C5w" customClass="RubyView">
+                                            <rect key="frame" x="0.0" y="0.0" width="562" height="227"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="227" placeholder="YES" id="rA6-Q8-PdZ"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="aBj-or-C5w" secondAttribute="trailing" constant="10" id="X3l-ku-tlE"/>
-                                        <constraint firstItem="aBj-or-C5w" firstAttribute="leading" secondItem="03T-xZ-wAD" secondAttribute="leading" constant="10" id="aPz-n3-16y"/>
-                                        <constraint firstItem="aBj-or-C5w" firstAttribute="top" secondItem="03T-xZ-wAD" secondAttribute="top" id="fG7-Mj-hWM"/>
-                                        <constraint firstAttribute="bottom" secondItem="aBj-or-C5w" secondAttribute="bottom" id="zsL-WT-xbd"/>
+                                        <constraint firstAttribute="trailing" secondItem="aBj-or-C5w" secondAttribute="trailing" id="QMR-d8-DO4"/>
+                                        <constraint firstItem="aBj-or-C5w" firstAttribute="leading" secondItem="03T-xZ-wAD" secondAttribute="leading" id="QlL-I8-KLO"/>
+                                        <constraint firstItem="aBj-or-C5w" firstAttribute="top" secondItem="03T-xZ-wAD" secondAttribute="top" id="pdf-Vo-X2y"/>
                                     </constraints>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="wJD-qE-uv4">
@@ -86,6 +88,9 @@
                                 </scroller>
                             </scrollView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="g79-7W-e4I" firstAttribute="width" secondItem="03T-xZ-wAD" secondAttribute="width" id="REO-Z4-kfo"/>
+                        </constraints>
                         <holdingPriorities>
                             <real value="250"/>
                             <real value="250"/>
