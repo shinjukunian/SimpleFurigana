@@ -12,6 +12,10 @@
 @import CoreText;
 
 @implementation RubyView{
+    CGRect printRect;
+    BOOL portrait;
+    NSUInteger currentPage;
+    NSUInteger numberOfPages;
 
 }
 
@@ -33,7 +37,12 @@
     
     else if(self.type==RubyTypeHiraganaOnly){
         NSString *hiragana=[string.string stringByReplacingJapaneseKanjiWithHiragana];
-        NSAttributedString *hiraganaAttr=[[NSAttributedString alloc]initWithString:hiragana attributes:[string attributesAtIndex:0 effectiveRange:NULL]];
+        NSMutableDictionary *dict=[[string attributesAtIndex:0 effectiveRange:NULL]mutableCopy];
+        
+        if (self.orientation==RubyVerticalText) {
+             [dict setObject:@YES forKey:(NSString*)kCTVerticalFormsAttributeName];
+         }
+        NSAttributedString *hiraganaAttr=[[NSAttributedString alloc]initWithString:hiragana attributes:dict];
         return CFBridgingRetain(hiraganaAttr);
     }
     else if (self.type==RubyTypeNone){
@@ -119,7 +128,35 @@
 
 
 
+-(BOOL)knowsPageRange:(NSRangePointer)range{
+    printRect=self.printInfo.imageablePageBounds;
+    printRect=CGRectInset(printRect, 20, 20);
+    CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+    CGSize constraints=printRect.size;
+    NSUInteger stringLength=CFAttributedStringGetLength(self.rubyString);
+    CFRange stringRange=CFRangeMake(0, stringLength);
+    CFRange fitrange=CFRangeMake(0, 0);
+    
+    numberOfPages=0;
+    while (fitrange.location+fitrange.length<stringLength) {
+        CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, stringRange, NULL, constraints, &fitrange);
+        stringRange.location=fitrange.location+fitrange.length;
+        stringRange.length=stringLength-stringRange.location;
+        numberOfPages+=1;
+    }
+    range->length=numberOfPages;
 
+    
+    return YES;
+}
+
+
+
+-(NSRect)rectForPage:(NSInteger)page{
+    
+    currentPage=page;
+    return printRect;
+}
 
 
 
@@ -127,42 +164,81 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     if (self.stringToTransform.length>0){
-    [[NSGraphicsContext currentContext] saveGraphicsState];
-    CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
-     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-       
-    CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-    CGPathRef path=CGPathCreateWithRect(self.bounds, NULL);
-  //  CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
-    //CFRange fitrange;
-  //  CGSize sizeToFit=CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
-    CTFrameRef frame;
-    if (self.orientation==RubyVerticalText) {
-        NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
-        CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
-        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+        
+        if ( ![NSGraphicsContext currentContextDrawingToScreen] ) {//printing
+            
+            [[NSGraphicsContext currentContext] saveGraphicsState];
+            CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
+            CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+            
+            CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+            CGPathRef path=CGPathCreateWithRect(printRect, NULL);
+            CTFrameRef frame;
+            CGSize constraints=printRect.size;
+            NSUInteger stringLength=CFAttributedStringGetLength(self.rubyString);
+            CFRange stringRange=CFRangeMake(0, stringLength);
+            CFRange fitrange=CFRangeMake(0, 0);
+            NSUInteger page=0;
+            while (fitrange.location+fitrange.length<stringLength) {
+                CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, stringRange, NULL, constraints, &fitrange);
+                page+=1;
+                if (page==currentPage) {
+                    break;
+                }
+                stringRange.location=fitrange.location+fitrange.length;
+                stringRange.length=stringLength-stringRange.location;
+                
+            }
+            
+            if (self.orientation==RubyVerticalText) {
+                NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+                CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+                frame=CTFramesetterCreateFrame(frameSetter, fitrange, path, cfDict);
+            }
+            else{
+                frame=CTFramesetterCreateFrame(frameSetter, fitrange
+                                               , path, NULL);
+                
+            }
+            
+            CGContextSaveGState(context);
+            CTFrameDraw(frame, context);
+            CGContextRestoreGState(context);
+            CFRelease(frame);
+            CFRelease(path);
+            CFRelease(frameSetter);
+        
+        
+        
         }
-    else{
-        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
-    
-    }
+        else{
+        
+            [[NSGraphicsContext currentContext] saveGraphicsState];
+            CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
+            CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+       
+            CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+            CGPathRef path=CGPathCreateWithRect(self.bounds, NULL);
+            CTFrameRef frame;
+            if (self.orientation==RubyVerticalText) {
+                NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+                CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+                frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+            }
+            else{
+                frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+            
+            }
    
-    CGContextSaveGState(context);
+            CGContextSaveGState(context);
+            CTFrameDraw(frame, context);
+            CGContextRestoreGState(context);
+            CFRelease(frame);
+            CFRelease(path);
+            CFRelease(frameSetter);
+        }
+    }
 
-
-    CTFrameDraw(frame, context);
-    CGContextRestoreGState(context);
-    
-    CFRelease(frame);
-    CFRelease(path);
-    CFRelease(frameSetter);
-
-}
-
-    
-    
- //   CGColorRelease(white);
-   // CGColorRelease(red);
 }
 
 @end

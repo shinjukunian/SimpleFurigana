@@ -117,7 +117,7 @@
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                 <connections>
-                                    <action selector="print:" target="-1" id="qaZ-4w-aoO"/>
+                                    <action selector="printRubyView:" target="-1" id="Jsd-cZ-gSV"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -147,6 +147,9 @@
                                 <connections>
                                     <action selector="copy:" target="-1" id="G1f-GL-Joy"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Copy as PDF" keyEquivalent="c" id="axK-XP-yeD">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Paste" keyEquivalent="v" id="gVA-U4-sdL">
                                 <connections>

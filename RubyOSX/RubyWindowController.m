@@ -102,8 +102,13 @@
         default:
             break;
     }
+   
+}
 
-    
+- (IBAction)printRubyView:(id)sender {
+    NSPrintOperation *op=[NSPrintOperation printOperationWithView:self.rubyView];
+    [self.rubyView setPrintInfo:op.printInfo];
+    [op runOperation];
     
 }
 
