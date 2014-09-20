@@ -9,7 +9,15 @@
 
 
 #import "NSString+Japanese.h"
+
+#if TARGET_OS_IPHONE
 #import <UIKit/UITextChecker.h>
+#else
+
+#endif
+
+
+
 
 
 @implementation NSString (NSString_Japanese)

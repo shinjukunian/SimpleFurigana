@@ -20,11 +20,10 @@
 
 -(CFAttributedStringRef)furiganaAttributedString:(NSAttributedString*) string{
     
-    CFAttributedStringRef input=(__bridge CFAttributedStringRef)(string);
     
     if (self.type==RubyTypeFurigana) {
         NSDictionary *furiganaDict=[string.string hiraganaReplacementsForString];
-        return [self createRubyAttributedString:input furiganaRanges:furiganaDict];
+        return [self createRubyAttributedString:(__bridge CFAttributedStringRef)(string) furiganaRanges:furiganaDict];
     }
     /*  else if (self.type==RubyTypeFuriganaRomaji){
      NSDictionary *romajiDict=[string.string romajiReplacementsForString];
@@ -38,7 +37,17 @@
         return CFBridgingRetain(hiraganaAttr);
     }
     else if (self.type==RubyTypeNone){
-        return input;
+        
+        if (self.orientation==RubyVerticalText) {
+            NSMutableAttributedString *vertical=[[NSMutableAttributedString alloc]initWithAttributedString:string];
+            [vertical addAttributes:@{(NSString*)kCTVerticalFormsAttributeName:@YES} range:NSMakeRange(0, vertical.length)];
+            return CFBridgingRetain(vertical.copy);
+        }
+        else{
+            
+            return (__bridge CFAttributedStringRef)(string);
+        }
+       
     }
     
     return nil;
@@ -127,7 +136,17 @@
   //  CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
     //CFRange fitrange;
   //  CGSize sizeToFit=CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
-    CTFrameRef frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+    CTFrameRef frame;
+    if (self.orientation==RubyVerticalText) {
+        NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+        CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+        }
+    else{
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+    
+    }
+   
     CGContextSaveGState(context);
 
 

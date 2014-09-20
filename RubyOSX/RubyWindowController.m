@@ -35,4 +35,77 @@
     
 }
 
+
+
+-(BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString{
+    NSString *new=[textView.textStorage.string stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
+    NSAttributedString *newAttributed=[[NSAttributedString alloc]initWithString:new attributes:attributes];
+    [self.rubyView setStringToTransform:newAttributed];
+    [self.rubyView invalidateIntrinsicContentSize];
+    [self.rubyView setNeedsDisplay:YES];
+    return YES;
+}
+
+
+-(IBAction)transcriptionModeChanged:(NSSegmentedControl*)sender{
+    NSInteger selection=sender.selectedSegment;
+    
+    switch (selection) {
+        case 0:
+            [self.rubyView setType:RubyTypeNone];
+            [self.rubyView invalidateIntrinsicContentSize];
+            [self.rubyView setNeedsDisplay:YES];
+            
+            break;
+            
+        case 1:
+            [self.rubyView setType:RubyTypeHiraganaOnly];
+            [self.rubyView invalidateIntrinsicContentSize];
+            [self.rubyView setNeedsDisplay:YES];
+            
+
+            
+            break;
+        case 2:
+            
+            break;
+
+
+        default:
+            break;
+    }
+    
+    
+}
+
+-(IBAction)textOrientationHasChanged:(NSSegmentedControl*)sender{
+    
+    NSInteger selection=sender.selectedSegment;
+    
+    switch (selection) {
+        case 0:
+            [self.rubyView setOrientation:RubyHorizontalText];
+            [self.rubyView invalidateIntrinsicContentSize];
+            [self.rubyView setNeedsDisplay:YES];
+            
+            break;
+            
+        case 1:
+            [self.rubyView setOrientation:RubyVerticalText];
+            [self.rubyView invalidateIntrinsicContentSize];
+            [self.rubyView setNeedsDisplay:YES];
+            
+            
+            
+            break;
+        
+        default:
+            break;
+    }
+
+    
+    
+}
+
+
 @end

@@ -26,6 +26,7 @@
 		B73E68D319CD370B00418974 /* RubyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73E68D119CD370B00418974 /* RubyWindowController.m */; };
 		B73E68D419CD370B00418974 /* RubyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73E68D219CD370B00418974 /* RubyWindowController.xib */; };
 		B73E68D719CD388500418974 /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B73E68D619CD388500418974 /* RubyView.m */; };
+		B73E68DB19CD538000418974 /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
 
@@ -505,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73E68DB19CD538000418974 /* NSString+Japanese.m in Sources */,
 				B73E68D319CD370B00418974 /* RubyWindowController.m in Sources */,
 				B73E68B819CD36CE00418974 /* AppDelegate.m in Sources */,
 				B73E68D719CD388500418974 /* RubyView.m in Sources */,
