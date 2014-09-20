@@ -34,7 +34,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ZoF-Hp-bW9">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="239"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="605" height="239"/>
@@ -65,14 +65,12 @@
                                     <rect key="frame" x="1" y="1" width="166" height="79"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view translatesAutoresizingMaskIntoConstraints="NO" id="aBj-or-C5w" customClass="RubyView">
-                                            <rect key="frame" x="0.0" y="-97" width="605" height="400"/>
-                                        </view>
+                                        <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBj-or-C5w" customClass="RubyView"/>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="aBj-or-C5w" secondAttribute="trailing" id="GxN-i6-TOa"/>
                                         <constraint firstItem="aBj-or-C5w" firstAttribute="leading" secondItem="03T-xZ-wAD" secondAttribute="leading" id="NzP-1d-3Vq"/>
-                                        <constraint firstAttribute="bottom" secondItem="aBj-or-C5w" secondAttribute="bottom" constant="-97" id="XAc-v4-yth"/>
+                                        <constraint firstAttribute="centerY" secondItem="aBj-or-C5w" secondAttribute="centerY" placeholder="YES" id="ZKc-0U-WgI"/>
                                         <constraint firstItem="aBj-or-C5w" firstAttribute="top" secondItem="03T-xZ-wAD" secondAttribute="top" id="pEz-Sy-gcY"/>
                                     </constraints>
                                 </clipView>
@@ -80,7 +78,7 @@
                                     <rect key="frame" x="1" y="80" width="166" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="VFe-ia-iC4">
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="VFe-ia-iC4">
                                     <rect key="frame" x="167" y="1" width="15" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

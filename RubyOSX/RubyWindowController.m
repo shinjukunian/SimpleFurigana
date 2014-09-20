@@ -47,6 +47,13 @@
 
 
 
+
+
+-(void)windowDidEndLiveResize:(NSNotification *)notification{
+    [self.rubyView invalidateIntrinsicContentSize];
+}
+
+
 -(BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString{
     NSString *new=[textView.textStorage.string stringByReplacingCharactersInRange:affectedCharRange withString:replacementString];
     NSAttributedString *newAttributed=[[NSAttributedString alloc]initWithString:new attributes:attributes];
@@ -77,6 +84,9 @@
             
             break;
         case 2:
+            [self.rubyView setType:RubyTypeFurigana];
+            [self.rubyView invalidateIntrinsicContentSize];
+            [self.rubyView setNeedsDisplay:YES];
             
             break;
 

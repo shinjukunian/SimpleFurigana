@@ -94,17 +94,14 @@
 }
 
 
--(void)updateConstraints{
-    [super updateConstraints];
-    
-}
+
 
 -(NSSize)intrinsicContentSize{
     if (self.stringToTransform.length>0) {
         
         self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         
-      //  [self removeConstraint:heightConstraint];
+        [self removeConstraint:heightConstraint];
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
         CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
         CFRange fitrange;
@@ -112,9 +109,9 @@
         //newSize.width=size.width;
         self.intrinsicContentSize=newSize;
         CFRelease(framesetter);
-      //  heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
+        heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
         
-     //   [self addConstraint:heightConstraint];
+       [self addConstraint:heightConstraint];
         
         
         NSLog(@"%@",NSStringFromSize(newSize));
