@@ -16,6 +16,7 @@
     BOOL portrait;
     NSUInteger currentPage;
     NSUInteger numberOfPages;
+    NSLayoutConstraint *heightConstraint;
 
 }
 
@@ -92,12 +93,18 @@
    
 }
 
+
+-(void)updateConstraints{
+    [super updateConstraints];
+    
+}
+
 -(NSSize)intrinsicContentSize{
     if (self.stringToTransform.length>0) {
         
         self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         
-        //  [self removeConstraint:heightConstraint];
+      //  [self removeConstraint:heightConstraint];
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
         CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
         CFRange fitrange;
@@ -105,19 +112,21 @@
         //newSize.width=size.width;
         self.intrinsicContentSize=newSize;
         CFRelease(framesetter);
-        //    heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
+      //  heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
         
-        //  [self addConstraint:heightConstraint];
+     //   [self addConstraint:heightConstraint];
         
         
         NSLog(@"%@",NSStringFromSize(newSize));
 
-    return newSize;
+   // return CGSizeMake(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
+        return CGSizeMake(NSViewNoInstrinsicMetric, newSize.height);
     }
     else{
         return self.bounds.size;
     }
 }
+
 
 -(void)setIntrinsicContentSize:(CGSize)intrinsicContentSize{
     
@@ -165,6 +174,7 @@
     [super drawRect:dirtyRect];
     if (self.stringToTransform.length>0){
         
+        self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         if ( ![NSGraphicsContext currentContextDrawingToScreen] ) {//printing
             
             [[NSGraphicsContext currentContext] saveGraphicsState];
@@ -213,11 +223,12 @@
         }
         
         else{
-        
+           // NSLog(@"%@",NSStringFromRect(self.frame));
             [[NSGraphicsContext currentContext] saveGraphicsState];
             CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
             CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-       
+            CGContextSetFillColorWithColor(context, [[NSColor redColor]CGColor]);
+            CGContextFillRect(context, dirtyRect);
             CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
             CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 10, 10), NULL);
             CTFrameRef frame;

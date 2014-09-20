@@ -30,7 +30,7 @@
     [self.scrollView setBackgroundColor:[NSColor whiteColor]];
     [self.scrollView setDrawsBackground:YES];
     [self.rubyView invalidateIntrinsicContentSize];
-
+    [[self scrollView]setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     
     
@@ -42,6 +42,9 @@
     
     return YES;
 }
+
+
+
 
 
 -(BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString{
