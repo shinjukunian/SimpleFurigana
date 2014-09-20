@@ -6,7 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
+
+#if TARGET_OS_IPHONE
+    @import UIKit;
+#else
+    @import AppKit;
+#endif
 
 /*
 * Text Type
