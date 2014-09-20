@@ -165,6 +165,9 @@
                     <toolbarItem reference="d66-GU-5Xy"/>
                     <toolbarItem reference="WYG-e3-iVx"/>
                 </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="-2" id="Ijf-fe-gH1"/>
+                </connections>
             </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>

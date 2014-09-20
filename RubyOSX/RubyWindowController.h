@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 @class RubyView;
 
-@interface RubyWindowController : NSWindowController<NSTextViewDelegate>
+@interface RubyWindowController : NSWindowController<NSTextViewDelegate,NSToolbarDelegate>
 
 @property IBOutlet NSTextView *textView;
 @property IBOutlet NSScrollView *scrollView;

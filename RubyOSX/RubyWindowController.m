@@ -36,6 +36,12 @@
     
 }
 
+-(BOOL)validateToolbarItem:(NSToolbarItem *)theItem{
+    
+    
+    
+    return YES;
+}
 
 
 -(BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString{
