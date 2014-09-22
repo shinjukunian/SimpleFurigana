@@ -17,6 +17,6 @@
 @property NSAttributedString *stringToTransform;
 @property textOrientation orientation;
 @property IBOutlet UIToolbar *toolBar;
-
+@property IBOutlet UIScrollView *scrollView;
 
 @end

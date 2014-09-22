@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *input=@"事前参加登録者";
+    NSString *input=@"事前参加登録者.事前参加登録者. 事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.事前参加登録者.";
    
     attributes=@{NSFontAttributeName:[UIFont systemFontOfSize:20]};
     
@@ -34,6 +34,7 @@
     [self.rubyView setType:RubyTypeNone];
     [self.rubyView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.rubyView.hostingScrollView=self.scrollView;
    
 }
 

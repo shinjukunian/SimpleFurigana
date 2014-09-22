@@ -102,7 +102,7 @@
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="dbw-xF-9KR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Rb1-qt-ttf" secondAttribute="trailing" constant="-16" id="dj2-Km-kOm"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="leading" secondItem="PyN-YS-Mna" secondAttribute="leading" id="kpp-YN-USY"/>
-                            <constraint firstItem="PyN-YS-Mna" firstAttribute="width" secondItem="aae-Ss-w9Z" secondAttribute="width" id="mCK-9E-ZKR"/>
+                            <constraint firstItem="PyN-YS-Mna" firstAttribute="width" secondItem="aae-Ss-w9Z" secondAttribute="width" placeholder="YES" id="mCK-9E-ZKR"/>
                             <constraint firstItem="PyN-YS-Mna" firstAttribute="top" secondItem="Aqr-mU-vhv" secondAttribute="bottom" constant="8" id="rIF-rw-aB6"/>
                             <constraint firstItem="Aqr-mU-vhv" firstAttribute="top" secondItem="fJy-Hf-Yxz" secondAttribute="bottom" constant="8" id="rxJ-yc-Dgc"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="PyN-YS-Mna" secondAttribute="trailing" id="s7S-pb-M8K"/>
@@ -144,22 +144,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueq-Gg-U4x">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ueq-Gg-U4x">
                                 <rect key="frame" x="6" y="30" width="588" height="560"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRU-k1-ohU" customClass="RubyView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="588" height="560"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.79769266120000004" green="1" blue="0.20452925259999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="leading" secondItem="ueq-Gg-U4x" secondAttribute="leading" id="0ZU-QU-XiJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="zRU-k1-ohU" secondAttribute="trailing" id="5mY-5w-h5U"/>
-                                    <constraint firstAttribute="centerY" secondItem="zRU-k1-ohU" secondAttribute="centerY" id="JP2-FG-tBb"/>
-                                    <constraint firstAttribute="bottom" secondItem="zRU-k1-ohU" secondAttribute="bottom" id="hGh-1p-0Ry"/>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="top" id="hob-Lg-QME"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerY" secondItem="ueq-Gg-U4x" secondAttribute="centerY" placeholder="YES" id="Rp8-ha-eLW"/>
+                                    <constraint firstAttribute="bottom" secondItem="zRU-k1-ohU" secondAttribute="bottom" id="Txf-mR-6dJ"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerX" secondItem="ueq-Gg-U4x" secondAttribute="centerX" placeholder="YES" id="U0n-AJ-Vxh"/>
+                                    <constraint firstAttribute="trailing" secondItem="zRU-k1-ohU" secondAttribute="trailing" id="gCM-Vc-HZw"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="leading" secondItem="ueq-Gg-U4x" secondAttribute="leading" id="wgt-h4-Pwq"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="top" id="yw3-ZJ-thq"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="eap-8K-WBg" appends="YES" id="AXr-4L-Wm3"/>
@@ -183,7 +183,6 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Vbj-DD-a6j" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="bottom" constant="10" id="0Xm-Tq-FCB"/>
-                            <constraint firstItem="zRU-k1-ohU" firstAttribute="width" secondItem="bxZ-F1-6k6" secondAttribute="width" id="CLj-sa-jxp"/>
                             <constraint firstItem="Vbj-DD-a6j" firstAttribute="top" secondItem="tHm-h0-BAu" secondAttribute="bottom" id="COQ-P7-rJA"/>
                             <constraint firstItem="ueq-Gg-U4x" firstAttribute="top" secondItem="8dt-5f-Ogs" secondAttribute="top" constant="10" id="EF9-CR-pot"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ueq-Gg-U4x" secondAttribute="trailing" constant="-10" id="Q5O-i4-mYa"/>
@@ -194,6 +193,7 @@
                     </view>
                     <connections>
                         <outlet property="rubyView" destination="zRU-k1-ohU" id="mAL-Dj-ndn"/>
+                        <outlet property="scrollView" destination="ueq-Gg-U4x" id="iGd-Ia-3X0"/>
                         <outlet property="toolBar" destination="tHm-h0-BAu" id="atc-w3-YRp"/>
                     </connections>
                 </viewController>

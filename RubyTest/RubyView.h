@@ -30,6 +30,6 @@ typedef enum{
 @property CGSize intrinsicContentSize;
 @property RubyType type;
 @property textOrientation orientation;
-
+@property (weak) UIScrollView *hostingScrollView;
 
 @end

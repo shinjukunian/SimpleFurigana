@@ -20,7 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
+    [self.rubyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
 
@@ -29,10 +30,23 @@
     self.rubyView.stringToTransform=self.stringToTransform;
     self.rubyView.orientation=self.orientation;
     self.rubyView.type=self.type;
+    self.rubyView.hostingScrollView=self.scrollView;
+   // [self.rubyView sizeToFit];
+
+    }
+
+-(void)viewWillLayoutSubviews{
+    
     [self.rubyView sizeToFit];
+    
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.rubyView sizeToFit];
+    [self.rubyView setNeedsDisplay];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

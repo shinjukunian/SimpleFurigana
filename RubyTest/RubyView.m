@@ -15,6 +15,7 @@
     
     
     NSLayoutConstraint *heightConstraint;
+    NSLayoutConstraint *widthConstraint;
 }
 
 // inspired by http://dev.classmethod.jp/references/ios8-ctrubyannotationref/
@@ -27,7 +28,9 @@
         
         NSDictionary *furiganaDict=[string.string hiraganaReplacementsForString];
         if (self.orientation==RubyVerticalText) {
-            NSDictionary *dict=@{(NSString*)kCTVerticalFormsAttributeName:@YES};
+            NSMutableParagraphStyle *para=[[NSMutableParagraphStyle alloc]init];
+            para.lineHeightMultiple=1;
+            NSDictionary *dict=@{(NSString*)kCTVerticalFormsAttributeName:@YES, NSParagraphStyleAttributeName:para};
             NSMutableAttributedString *vert=string.mutableCopy;
             [vert addAttributes:dict range:NSMakeRange(0, string.length)];
             return [self createRubyAttributedString:(__bridge CFAttributedStringRef)(vert) furiganaRanges:furiganaDict];
@@ -57,7 +60,11 @@
         
         if (self.orientation==RubyVerticalText) {
             NSMutableAttributedString *vertical=[[NSMutableAttributedString alloc]initWithAttributedString:string];
-            [vertical addAttributes:@{(NSString*)kCTVerticalFormsAttributeName:@YES} range:NSMakeRange(0, vertical.length)];
+            NSMutableParagraphStyle *para=[[NSMutableParagraphStyle alloc]init];
+            para.lineHeightMultiple=1;
+
+            [vertical addAttributes:@{(NSString*)kCTVerticalFormsAttributeName:@YES, NSParagraphStyleAttributeName:para} range:NSMakeRange(0, vertical.length)];
+            
             return CFBridgingRetain(vertical.copy);
         }
         else{
@@ -101,27 +108,45 @@
         self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         
         [self removeConstraint:heightConstraint];
+        [self removeConstraint:widthConstraint];
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-        CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
+        
         CFRange fitrange;
         CGSize newSize;
         if (self.orientation==RubyVerticalText){
+            CGSize constraints=CGSizeMake(CGFLOAT_MAX ,self.hostingScrollView.bounds.size.height);
             NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
             CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
             newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), cfDict, constraints, &fitrange);
+            if (newSize.width<self.hostingScrollView.bounds.size.width) {
+                //newSize.width=self.hostingScrollView.bounds.size.width;
+            }
+            heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
+            widthConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.width];
+
+            [self addConstraint:heightConstraint];
+            [self addConstraint:widthConstraint];
+            CGRect scrollViewrect=CGRectMake(CGRectGetMaxX(self.hostingScrollView.bounds)-newSize.width, 0, newSize.width, newSize.height);
+            [self.hostingScrollView scrollRectToVisible:scrollViewrect animated:NO];
+            [self.hostingScrollView setPagingEnabled:YES];
+
             
         }
         else{
+            CGSize constraints=CGSizeMake(self.hostingScrollView.bounds.size.width, CGFLOAT_MAX);
              newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
-            
+            heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
+            widthConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.width];
+           
+            [self addConstraint:widthConstraint];
+            [self addConstraint:heightConstraint];
+            [self.hostingScrollView setPagingEnabled:NO];
+
         }
         //newSize.width=size.width;
         self.intrinsicContentSize=newSize;
         CFRelease(framesetter);
-        heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
-
-        [self addConstraint:heightConstraint];
-       
+        
         
         NSLog(@"%@",NSStringFromCGSize(newSize));
         return newSize;
