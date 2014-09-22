@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "RubyView.h"
-
+#import "FullScreenViewController.h"
 @import CoreText;
 
 @interface ViewController (){
@@ -122,10 +122,33 @@
 }
 
 
+-(IBAction)tapToDismissKeyboard:(id)sender{
+    [self.inputTextView resignFirstResponder];
+    
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   
+    if([segue.identifier isEqualToString:@"toFullscreen"]){
+        
+        FullScreenViewController *fullScreen=segue.destinationViewController;
+        fullScreen.stringToTransform=self.rubyView.stringToTransform;
+        fullScreen.type=self.rubyView.type;
+        fullScreen.orientation=self.rubyView.orientation;
+               
+    }
+    
+    
+    
+}
+
 
 @end

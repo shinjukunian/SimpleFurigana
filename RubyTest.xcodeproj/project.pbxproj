@@ -27,6 +27,7 @@
 		B73E68D419CD370B00418974 /* RubyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73E68D219CD370B00418974 /* RubyWindowController.xib */; };
 		B73E68D719CD388500418974 /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B73E68D619CD388500418974 /* RubyView.m */; };
 		B73E68DB19CD538000418974 /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
+		B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,8 @@
 		B73E68D219CD370B00418974 /* RubyWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RubyWindowController.xib; sourceTree = "<group>"; };
 		B73E68D519CD388500418974 /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
 		B73E68D619CD388500418974 /* RubyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyView.m; sourceTree = "<group>"; };
+		B76D29C319D00EFC00CA3696 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
+		B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
 		B7E18D0619CB0A99005CEB0B /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
 		B7E18D0719CB0A99005CEB0B /* RubyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +193,8 @@
 				B7E18D0619CB0A99005CEB0B /* RubyView.h */,
 				B7E18D0719CB0A99005CEB0B /* RubyView.m */,
 				B70A5B9E19CB041100079CDF /* Main.storyboard */,
+				B76D29C319D00EFC00CA3696 /* FullScreenViewController.h */,
+				B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */,
 				B70A5BA119CB041100079CDF /* Images.xcassets */,
 				B70A5BA319CB041100079CDF /* LaunchScreen.xib */,
 				B70A5B9419CB041100079CDF /* Supporting Files */,
@@ -484,6 +489,7 @@
 				B70A5B9A19CB041100079CDF /* AppDelegate.m in Sources */,
 				B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */,
 				B70A5B9719CB041100079CDF /* main.m in Sources */,
+				B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

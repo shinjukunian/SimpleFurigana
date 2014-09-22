@@ -1,0 +1,69 @@
+//
+//  FullScreenViewController.m
+//  RubyTest
+//
+//  Created by Morten Bertz on 9/22/14.
+//  Copyright (c) 2014 Morten Bertz. All rights reserved.
+//
+
+#import "FullScreenViewController.h"
+
+@interface FullScreenViewController ()
+
+@end
+
+@implementation FullScreenViewController{
+    
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Do any additional setup after loading the view.
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.rubyView.stringToTransform=self.stringToTransform;
+    self.rubyView.orientation=self.orientation;
+    self.rubyView.type=self.type;
+    [self.rubyView sizeToFit];
+}
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+-(IBAction)dismissByEdgeSwipe:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+}
+
+-(IBAction)longPressureGestureRecongnized:(UILongPressGestureRecognizer*)sender{
+    if (sender.state==UIGestureRecognizerStateBegan) {
+        [self.toolBar setHidden:!self.toolBar.hidden];
+    }
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
+@end

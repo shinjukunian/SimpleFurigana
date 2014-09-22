@@ -38,13 +38,15 @@
                                 </connections>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
-                                <rect key="frame" x="16" y="203" width="568" height="377"/>
+                                <rect key="frame" x="16" y="203" width="568" height="345"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="377"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="345"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="aae-Ss-w9Z" secondAttribute="trailing" id="HVU-iN-gGN"/>
                                     <constraint firstItem="aae-Ss-w9Z" firstAttribute="centerY" secondItem="dfs-K2-7Dw" secondAttribute="centerY" placeholder="YES" id="NmY-q8-rPW"/>
@@ -54,6 +56,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="cmc-hO-N4q"/>
+                                    <outletCollection property="gestureRecognizers" destination="ePd-Xm-Sfy" appends="YES" id="t1B-Kr-aYI"/>
                                 </connections>
                             </scrollView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Aqr-mU-vhv">
@@ -66,17 +69,38 @@
                                     <action selector="writingOrientationDidChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="DSZ-Qh-qxV"/>
                                 </connections>
                             </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rb1-qt-ttf">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <gestureRecognizers/>
+                                <items>
+                                    <barButtonItem title="Hide Controlls" id="3jK-xC-ijA">
+                                        <connections>
+                                            <segue destination="biB-yU-KlY" kind="presentation" identifier="toFullscreen" id="hcW-lH-Kgo"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vFv-cn-DGR"/>
+                                    <barButtonItem systemItem="action" id="9h8-Ma-uxg"/>
+                                </items>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Yif-TB-Y4f" appends="YES" id="iz8-4v-1p7"/>
+                                    <outletCollection property="gestureRecognizers" destination="oi3-nN-gJ3" appends="YES" id="OSz-gc-xck"/>
+                                </connections>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Rb1-qt-ttf" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="03b-LF-Y6N"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="8YJ-vM-m9o"/>
+                            <constraint firstItem="Rb1-qt-ttf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="F3M-n6-jqW"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Rb1-qt-ttf" secondAttribute="bottom" id="IYI-4c-Xjm"/>
                             <constraint firstAttribute="centerX" secondItem="fJy-Hf-Yxz" secondAttribute="centerX" id="IkF-hJ-aEC"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="bottom" constant="20" id="Kk2-Yd-Cgl"/>
                             <constraint firstItem="dfs-K2-7Dw" firstAttribute="leading" secondItem="PyN-YS-Mna" secondAttribute="leading" id="RgB-pn-HyP"/>
                             <constraint firstItem="dfs-K2-7Dw" firstAttribute="trailing" secondItem="PyN-YS-Mna" secondAttribute="trailing" id="TIA-iD-ecH"/>
+                            <constraint firstItem="Rb1-qt-ttf" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="bottom" constant="8" id="U0l-I3-wMX"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="Aqr-mU-vhv" secondAttribute="trailing" id="VkN-ei-GZC"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="width" secondItem="Aqr-mU-vhv" secondAttribute="width" id="b2V-Fk-vUo"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="dbw-xF-9KR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rb1-qt-ttf" secondAttribute="trailing" constant="-16" id="dj2-Km-kOm"/>
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="leading" secondItem="PyN-YS-Mna" secondAttribute="leading" id="kpp-YN-USY"/>
                             <constraint firstItem="PyN-YS-Mna" firstAttribute="width" secondItem="aae-Ss-w9Z" secondAttribute="width" id="mCK-9E-ZKR"/>
                             <constraint firstItem="PyN-YS-Mna" firstAttribute="top" secondItem="Aqr-mU-vhv" secondAttribute="bottom" constant="8" id="rIF-rw-aB6"/>
@@ -84,6 +108,11 @@
                             <constraint firstItem="fJy-Hf-Yxz" firstAttribute="trailing" secondItem="PyN-YS-Mna" secondAttribute="trailing" id="s7S-pb-M8K"/>
                             <constraint firstItem="dfs-K2-7Dw" firstAttribute="top" secondItem="PyN-YS-Mna" secondAttribute="bottom" constant="8" id="tbH-pL-1Qf"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="03b-LF-Y6N"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="漢字" id="RzY-mY-BBB"/>
                     <connections>
@@ -93,8 +122,95 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ePd-Xm-Sfy">
+                    <connections>
+                        <action selector="tapToDismissKeyboard:" destination="vXZ-lx-hvc" id="tPI-G6-UDz"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Yif-TB-Y4f"/>
+                <tapGestureRecognizer id="oi3-nN-gJ3"/>
             </objects>
             <point key="canvasLocation" x="60" y="1053"/>
+        </scene>
+        <!--Full Screen View Controller-->
+        <scene sceneID="9b9-rN-EeL">
+            <objects>
+                <viewController id="biB-yU-KlY" customClass="FullScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8dt-5f-Ogs"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vbj-DD-a6j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bxZ-F1-6k6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueq-Gg-U4x">
+                                <rect key="frame" x="6" y="30" width="588" height="560"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRU-k1-ohU" customClass="RubyView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.79769266120000004" green="1" blue="0.20452925259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="leading" secondItem="ueq-Gg-U4x" secondAttribute="leading" id="0ZU-QU-XiJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="zRU-k1-ohU" secondAttribute="trailing" id="5mY-5w-h5U"/>
+                                    <constraint firstAttribute="centerY" secondItem="zRU-k1-ohU" secondAttribute="centerY" id="JP2-FG-tBb"/>
+                                    <constraint firstAttribute="bottom" secondItem="zRU-k1-ohU" secondAttribute="bottom" id="hGh-1p-0Ry"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="top" id="hob-Lg-QME"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eap-8K-WBg" appends="YES" id="AXr-4L-Wm3"/>
+                                    <outletCollection property="gestureRecognizers" destination="UXk-2Y-bKD" appends="YES" id="ZYU-CO-Zte"/>
+                                </connections>
+                            </scrollView>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHm-h0-BAu">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="done" id="2aM-Tw-LyV">
+                                        <connections>
+                                            <action selector="dismissByEdgeSwipe:" destination="biB-yU-KlY" id="1nw-pE-5HG"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="V2D-Zo-aV8"/>
+                                    <barButtonItem systemItem="action" id="tvt-PA-5h5"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Vbj-DD-a6j" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="bottom" constant="10" id="0Xm-Tq-FCB"/>
+                            <constraint firstItem="zRU-k1-ohU" firstAttribute="width" secondItem="bxZ-F1-6k6" secondAttribute="width" id="CLj-sa-jxp"/>
+                            <constraint firstItem="Vbj-DD-a6j" firstAttribute="top" secondItem="tHm-h0-BAu" secondAttribute="bottom" id="COQ-P7-rJA"/>
+                            <constraint firstItem="ueq-Gg-U4x" firstAttribute="top" secondItem="8dt-5f-Ogs" secondAttribute="top" constant="10" id="EF9-CR-pot"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ueq-Gg-U4x" secondAttribute="trailing" constant="-10" id="Q5O-i4-mYa"/>
+                            <constraint firstItem="tHm-h0-BAu" firstAttribute="leading" secondItem="bxZ-F1-6k6" secondAttribute="leadingMargin" constant="-16" id="gOv-Hl-yoG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tHm-h0-BAu" secondAttribute="trailing" constant="-16" id="sg8-eE-J7D"/>
+                            <constraint firstItem="ueq-Gg-U4x" firstAttribute="leading" secondItem="bxZ-F1-6k6" secondAttribute="leadingMargin" constant="-10" id="vzv-gC-FR6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="rubyView" destination="zRU-k1-ohU" id="mAL-Dj-ndn"/>
+                        <outlet property="toolBar" destination="tHm-h0-BAu" id="atc-w3-YRp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bs4-mt-tXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="eap-8K-WBg">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="dismissByEdgeSwipe:" destination="biB-yU-KlY" id="6n6-RN-ei9"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="UXk-2Y-bKD">
+                    <connections>
+                        <action selector="longPressureGestureRecongnized:" destination="biB-yU-KlY" id="Hoh-qp-cbB"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="789" y="1214"/>
         </scene>
     </scenes>
 </document>
