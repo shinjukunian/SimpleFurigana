@@ -21,32 +21,56 @@
 
 
 -(CFAttributedStringRef)furiganaAttributedString:(NSAttributedString*) string{
-   
-    CFAttributedStringRef input=(__bridge CFAttributedStringRef)(string);
+    
     
     if (self.type==RubyTypeFurigana) {
-        NSDictionary *furiganaDict=[string.string hiraganaReplacementsForString];
-        return [self createAttributedString:input furiganaRanges:furiganaDict];
-    }
-  /*  else if (self.type==RubyTypeFuriganaRomaji){
-        NSDictionary *romajiDict=[string.string romajiReplacementsForString];
-        return [self createAttributedString:input furiganaRanges:romajiDict];
         
-    }*/
+        NSDictionary *furiganaDict=[string.string hiraganaReplacementsForString];
+        if (self.orientation==RubyVerticalText) {
+            NSDictionary *dict=@{(NSString*)kCTVerticalFormsAttributeName:@YES};
+            NSMutableAttributedString *vert=string.mutableCopy;
+            [vert addAttributes:dict range:NSMakeRange(0, string.length)];
+            return [self createRubyAttributedString:(__bridge CFAttributedStringRef)(vert) furiganaRanges:furiganaDict];
+        
+        }
+        else{
+            return [self createRubyAttributedString:(__bridge CFAttributedStringRef)(string) furiganaRanges:furiganaDict];
+        }
+    }
+    /*  else if (self.type==RubyTypeFuriganaRomaji){
+     NSDictionary *romajiDict=[string.string romajiReplacementsForString];
+     return [self createAttributedString:input furiganaRanges:romajiDict];
+     
+     }*/
     
     else if(self.type==RubyTypeHiraganaOnly){
         NSString *hiragana=[string.string stringByReplacingJapaneseKanjiWithHiragana];
-        NSAttributedString *hiraganaAttr=[[NSAttributedString alloc]initWithString:hiragana attributes:[string attributesAtIndex:0 effectiveRange:NULL]];
+        NSMutableDictionary *dict=[[string attributesAtIndex:0 effectiveRange:NULL]mutableCopy];
+        
+        if (self.orientation==RubyVerticalText) {
+            [dict setObject:@YES forKey:(NSString*)kCTVerticalFormsAttributeName];
+        }
+        NSAttributedString *hiraganaAttr=[[NSAttributedString alloc]initWithString:hiragana attributes:dict];
         return CFBridgingRetain(hiraganaAttr);
     }
     else if (self.type==RubyTypeNone){
-        return input;
+        
+        if (self.orientation==RubyVerticalText) {
+            NSMutableAttributedString *vertical=[[NSMutableAttributedString alloc]initWithAttributedString:string];
+            [vertical addAttributes:@{(NSString*)kCTVerticalFormsAttributeName:@YES} range:NSMakeRange(0, vertical.length)];
+            return CFBridgingRetain(vertical.copy);
+        }
+        else{
+            
+            return (__bridge CFAttributedStringRef)(string);
+        }
+        
     }
     
     return nil;
 }
 
-- (CFAttributedStringRef)createAttributedString:(CFAttributedStringRef)string furiganaRanges:(NSDictionary*)furigana
+- (CFAttributedStringRef)createRubyAttributedString:(CFAttributedStringRef)string furiganaRanges:(NSDictionary*)furigana
 {
     CFMutableAttributedStringRef stringMutable=CFAttributedStringCreateMutableCopy(NULL, CFAttributedStringGetLength(string), string);
     for (NSValue *value in furigana.keyEnumerator) {
@@ -80,7 +104,17 @@
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
         CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
         CFRange fitrange;
-        CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
+        CGSize newSize;
+        if (self.orientation==RubyVerticalText){
+            NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+            CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+            newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), cfDict, constraints, &fitrange);
+            
+        }
+        else{
+             newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
+            
+        }
         //newSize.width=size.width;
         self.intrinsicContentSize=newSize;
         CFRelease(framesetter);
@@ -115,7 +149,16 @@
 
         CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
         CGPathRef path=CGPathCreateWithRect(self.bounds, NULL);
-        CTFrameRef frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+        CTFrameRef frame;
+        if (self.orientation==RubyVerticalText) {
+            NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+            CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+            frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+        }
+        else{
+            frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+            
+        }
         CTFrameDraw(frame, context);
         CFRelease(frame);
         CFRelease(path);

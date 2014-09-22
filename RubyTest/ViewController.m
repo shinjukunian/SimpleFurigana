@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *input=@"事前参加登録者 各位※本メールはBCCでお送りしております。このたびは、日本生物物理学会 第52回年会（札幌）へ参加ご登録いただき、ありがとうございます。また、【年会参加費】をご送金いただき、ありがとうございました。貴殿におかれましては、<年度会費>のお支払いが完了されていないようです。申し訳ありませんが、会費を滞納されますと、会員価格が適用できませんので、年会当日、会員受付（2番受付）でお支払いくださいますよう、お願いいたします。既に会費をご送金いただいている場合は、払込書控え（受領証）を受付にご持参ください。お支払い手続き完了後、参加証をお渡しいたします。それでは、札幌でお待ちしております";
+    NSString *input=@"事前参加登録者";
    
     attributes=@{NSFontAttributeName:[UIFont systemFontOfSize:20]};
     
@@ -49,6 +49,10 @@
         if (string.length>0) {
             NSAttributedString *att=[[NSAttributedString alloc]initWithString:string attributes:attributes];
             [self.inputTextView setAttributedText:att];
+            [self.rubyView setStringToTransform:att];
+            [self.rubyView sizeToFit];
+            [self.rubyView setNeedsDisplay];
+
         }
     }
        
@@ -100,7 +104,22 @@
     
 }
 
-
+-(IBAction)writingOrientationDidChange:(UISegmentedControl*)sender{
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            [self.rubyView setOrientation:RubyHorizontalText];
+            break;
+        case 1:
+            [self.rubyView setOrientation:RubyVerticalText];
+            break;
+        default:
+            break;
+    }
+    [self.rubyView sizeToFit];
+    [self.rubyView setNeedsDisplay];
+    
+    
+}
 
 
 

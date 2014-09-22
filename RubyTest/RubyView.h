@@ -19,12 +19,17 @@ typedef enum{
     RubyTypeNone,
 }RubyType;
 
-
+typedef enum{
+    RubyHorizontalText,
+    RubyVerticalText,
+    
+}textOrientation;
 
 @property CFAttributedStringRef rubyString;
 @property NSAttributedString *stringToTransform;
 @property CGSize intrinsicContentSize;
 @property RubyType type;
+@property textOrientation orientation;
 
 
 @end

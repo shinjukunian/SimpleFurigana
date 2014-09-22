@@ -17,7 +17,11 @@
     NSUInteger currentPage;
     NSUInteger numberOfPages;
     NSLayoutConstraint *heightConstraint;
-
+    NSArray *lineRects;
+    NSArray *lines;
+    NSArray *lineOrigins;
+    CGRect highlightRect;
+    CGRect textBoundingBox;
 }
 
 
@@ -101,17 +105,17 @@
         
         self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         
-        [self removeConstraint:heightConstraint];
+      //  [self removeConstraint:heightConstraint];
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-        CGSize constraints=CGSizeMake(self.bounds.size.width, CGFLOAT_MAX);
+        CGSize constraints=CGSizeMake(self.bounds.size.width-10, CGFLOAT_MAX);
         CFRange fitrange;
         CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
         //newSize.width=size.width;
-        self.intrinsicContentSize=newSize;
+       // self.intrinsicContentSize=newSize;
         CFRelease(framesetter);
-        heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
+//        heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
         
-       [self addConstraint:heightConstraint];
+      // [self addConstraint:heightConstraint];
         
         
         NSLog(@"%@",NSStringFromSize(newSize));
@@ -132,6 +136,21 @@
 
 }
 
+-(void)viewWillDraw{
+    
+    
+    
+}
+
+
+-(void)viewWillStartLiveResize{
+    
+}
+
+
+-(void)viewDidEndLiveResize{
+    
+}
 
 
 -(BOOL)knowsPageRange:(NSRangePointer)range{
@@ -166,6 +185,56 @@
 
 
 
+-(void)mouseDown:(NSEvent *)theEvent{
+    
+    highlightRect=CGRectNull;
+    self.highlightRange=NSMakeRange(0, 0);
+    self.needsDisplay=YES;
+
+}
+
+
+
+
+-(void)mouseDragged:(NSEvent *)theEvent{
+    
+    CGPoint hitpoint=[theEvent locationInWindow];
+    CGPoint localPoint=[self convertPoint:hitpoint fromView:nil];
+    for (NSUInteger i=0; i<lineRects.count; i++) {
+        CGRect lineRect=[[lineRects objectAtIndex:i]rectValue];
+        BOOL touchInside=CGRectContainsPoint(lineRect, localPoint);
+        if (touchInside) {
+            CGPoint origin=[[lineOrigins objectAtIndex:i]pointValue];
+            CTLineRef line=(__bridge CTLineRef)([lines objectAtIndex:i]);
+            CFIndex index=CTLineGetStringIndexForPosition(line, localPoint);
+
+            NSString *str=[self.stringToTransform.string substringWithRange:NSMakeRange(index-1, 1)];
+            CGFloat secondaryOffset1;
+            CGFloat offset1=CTLineGetOffsetForStringIndex(line, index-1, &secondaryOffset1);
+            CGFloat secondaryOffset2;
+            CGFloat offset2=CTLineGetOffsetForStringIndex(line, index, &secondaryOffset2);
+            if (self.highlightRange.length==0) {
+                self.highlightRange=NSMakeRange(index-1, 1);
+            }
+            else{
+                self.highlightRange=NSUnionRange(self.highlightRange, NSMakeRange(index-1, 1));
+            }
+            CGRect rect=CGRectMake(offset1+origin.x+textBoundingBox.origin.x, lineRect.origin.y, offset2-offset1, lineRect.size.height);
+            highlightRect=CGRectUnion(highlightRect, rect);
+            NSLog(@"%@",NSStringFromRange(self.highlightRange));
+            self.needsDisplay=YES;
+            break;
+        }
+        
+    }
+
+    
+}
+
+-(void)mouseUp:(NSEvent *)theEvent{
+    
+    
+}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
@@ -220,14 +289,14 @@
         }
         
         else{
-           // NSLog(@"%@",NSStringFromRect(self.frame));
+          //  NSLog(@"%@",NSStringFromRect(self.bounds));
             [[NSGraphicsContext currentContext] saveGraphicsState];
             CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
             CGContextSetTextMatrix(context, CGAffineTransformIdentity);
             CGContextSetFillColorWithColor(context, [[NSColor redColor]CGColor]);
-            CGContextFillRect(context, dirtyRect);
+            
             CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-            CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 10, 10), NULL);
+            CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 5, 5), NULL);
             CTFrameRef frame;
             if (self.orientation==RubyVerticalText) {
                 NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
@@ -238,7 +307,41 @@
                 frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
             
             }
-   
+            CFArrayRef cflines=CTFrameGetLines(frame);
+            NSArray *lineArray=(__bridge NSArray *)(cflines);
+            CGPoint origins[lineArray.count];
+            CTFrameGetLineOrigins(frame, CFRangeMake(0, lineArray.count), origins);
+            NSMutableArray *originArray=[NSMutableArray array];
+            for (NSUInteger i=0; i<lineArray.count; i++) {
+                [originArray addObject:[NSValue valueWithPoint:origins[i]]];
+            }
+            
+            CGRect firstLineRect;
+            NSMutableArray *lineRectArray=[NSMutableArray array];
+            for (NSUInteger i=0; i<lineArray.count; i++) {
+               // CGRect imageRect=CTLineGetImageBounds((CTLineRef)lineArray[i], context);
+                CFRange characterRange=CTLineGetStringRange((CTLineRef)lineArray[i]);
+                CGFloat ascent;
+                CGFloat descent;
+                CGFloat leading;
+                double width=CTLineGetTypographicBounds((CTLineRef)lineArray[i], &ascent, &descent, &leading);
+                CGFloat secondaryOffsetFirtCharacter;
+                CGFloat offsetFirstCharacter=CTLineGetOffsetForStringIndex((CTLineRef)lineArray[i], 0, &secondaryOffsetFirtCharacter);
+                CGFloat secondaryOffsetLastCharacter;
+                CGFloat offsetLastCharacter=CTLineGetOffsetForStringIndex((CTLineRef)lineArray[i], characterRange.length, &secondaryOffsetLastCharacter);
+                CGRect boundingBox=CGPathGetBoundingBox(path);
+                textBoundingBox=boundingBox;
+                CGPoint origin=[[originArray objectAtIndex:i]pointValue];
+                CGRect lineRect=CGRectMake(origin.x+offsetFirstCharacter+boundingBox.origin.x, origin.y-descent+boundingBox.origin.y, width, ascent+descent);
+                [lineRectArray addObject:[NSValue valueWithRect:lineRect]];
+               
+            }
+             CGContextFillRect(context, highlightRect);
+            lineRects=lineRectArray.copy;
+            lines=lineArray;
+            lineOrigins=originArray.copy;
+            
+           
             CGContextSaveGState(context);
             CTFrameDraw(frame, context);
             CGContextRestoreGState(context);

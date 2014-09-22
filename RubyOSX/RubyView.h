@@ -33,6 +33,6 @@ typedef enum{
 @property RubyType type;
 @property textOrientation orientation;
 @property NSPrintInfo *printInfo;
-
+@property NSRange highlightRange;
 
 @end

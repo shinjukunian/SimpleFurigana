@@ -396,6 +396,7 @@
 					};
 					B72777E619CBCC52000C973B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = DVQ96RL2KL;
 					};
 					B73E68AF19CD36CE00418974 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -851,6 +852,7 @@
 				B73E68CC19CD36CE00418974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B73E68CD19CD36CE00418974 /* Build configuration list for PBXNativeTarget "RubyOSXTests" */ = {
 			isa = XCConfigurationList;
@@ -859,6 +861,7 @@
 				B73E68CF19CD36CE00418974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
