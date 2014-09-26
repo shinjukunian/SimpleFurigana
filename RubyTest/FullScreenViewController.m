@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.rubyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.rubyView setTranslatesAutoresizingMaskIntoConstraints:YES];
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
@@ -31,21 +31,18 @@
     self.rubyView.orientation=self.orientation;
     self.rubyView.type=self.type;
     self.rubyView.hostingScrollView=self.scrollView;
-   // [self.rubyView sizeToFit];
+  
 
     }
 
--(void)viewWillLayoutSubviews{
-    
+-(void)viewDidLayoutSubviews{
     [self.rubyView sizeToFit];
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.rubyView sizeToFit];
-    [self.rubyView setNeedsDisplay];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

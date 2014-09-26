@@ -156,12 +156,12 @@
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerY" secondItem="ueq-Gg-U4x" secondAttribute="centerY" placeholder="YES" id="Rp8-ha-eLW"/>
-                                    <constraint firstAttribute="bottom" secondItem="zRU-k1-ohU" secondAttribute="bottom" id="Txf-mR-6dJ"/>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerX" secondItem="ueq-Gg-U4x" secondAttribute="centerX" placeholder="YES" id="U0n-AJ-Vxh"/>
-                                    <constraint firstAttribute="trailing" secondItem="zRU-k1-ohU" secondAttribute="trailing" id="gCM-Vc-HZw"/>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="leading" secondItem="ueq-Gg-U4x" secondAttribute="leading" id="wgt-h4-Pwq"/>
-                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="top" id="yw3-ZJ-thq"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerY" secondItem="ueq-Gg-U4x" secondAttribute="centerY" placeholder="YES" id="1Mh-8g-I4x"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="centerX" secondItem="ueq-Gg-U4x" secondAttribute="centerX" placeholder="YES" id="2G7-g9-hvc"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="top" secondItem="ueq-Gg-U4x" secondAttribute="top" placeholder="YES" id="BrV-N0-tjI"/>
+                                    <constraint firstAttribute="bottom" secondItem="zRU-k1-ohU" secondAttribute="bottom" placeholder="YES" id="JRH-6M-SCf"/>
+                                    <constraint firstItem="zRU-k1-ohU" firstAttribute="leading" secondItem="ueq-Gg-U4x" secondAttribute="leading" placeholder="YES" id="asD-i0-d8c"/>
+                                    <constraint firstAttribute="trailing" secondItem="zRU-k1-ohU" secondAttribute="trailing" placeholder="YES" id="avo-Jr-3rS"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="UXk-2Y-bKD" appends="YES" id="ZYU-CO-Zte"/>
@@ -199,7 +199,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bs4-mt-tXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.20000000000000004" id="UXk-2Y-bKD">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.10000000000000003" id="UXk-2Y-bKD">
                     <connections>
                         <action selector="longPressureGestureRecongnized:" destination="biB-yU-KlY" id="Hoh-qp-cbB"/>
                     </connections>

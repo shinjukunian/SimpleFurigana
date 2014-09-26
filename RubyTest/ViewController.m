@@ -60,17 +60,11 @@
     
 }
 
--(void)viewWillLayoutSubviews{
-    NSLog(@"viewcontrollerView: %@",NSStringFromCGSize(self.view.bounds.size));
 
-   // [self.rubyView sizeThatFits:self.view.bounds.size];
-    
-    
-}
 
 
 -(void)viewDidLayoutSubviews{
-    NSLog(@"%@",NSStringFromCGSize(self.scrollView.bounds.size));
+   // NSLog(@"%@",NSStringFromCGSize(self.scrollView.bounds.size));
     [self.rubyView sizeToFit];
    }
 

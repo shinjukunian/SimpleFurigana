@@ -118,7 +118,7 @@
             newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), cfDict, constraints, &fitrange);
             CFRelease(framesetter);
             if (newSize.width<self.hostingScrollView.bounds.size.width) {
-                //newSize.width=self.hostingScrollView.bounds.size.width;
+                newSize.width=self.hostingScrollView.bounds.size.width;
             }
             
             CGSize integerSize=CGSizeMake(ceil(newSize.width), ceil(newSize.height));
