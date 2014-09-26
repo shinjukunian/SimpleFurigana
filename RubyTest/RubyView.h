@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ViewController;
 
 @interface RubyView : UIView
 
@@ -31,5 +32,6 @@ typedef enum{
 @property RubyType type;
 @property textOrientation orientation;
 @property (weak) UIScrollView *hostingScrollView;
+@property (weak) ViewController *hostingViewController;
 
 @end
