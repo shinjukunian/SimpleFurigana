@@ -10,6 +10,8 @@
 #import "RubyView.h"
 #import "NSString+Japanese.h"
 #import "ViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+
 @import CoreText;
 
 @implementation RubyView{
@@ -18,6 +20,9 @@
 }
 
 // inspired by http://dev.classmethod.jp/references/ios8-ctrubyannotationref/
+
+
+
 
 
 -(CFAttributedStringRef)furiganaAttributedString:(NSAttributedString*) string{
@@ -187,6 +192,128 @@
     
 
 }
+
+
+-(id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType{
+    
+    if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll) {
+        return [self drawRubyViewinImage];
+    }
+   else if (activityType==UIActivityTypeMail) {
+        return [self drawRubyViewinPDF];
+    }
+   else{
+        return nil;
+   }
+  
+}
+
+-(id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController{
+    UIImage *dummy=[[UIImage alloc]init];
+    return dummy;
+}
+
+-(NSString*)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(NSString *)activityType{
+    
+    if (activityType==UIActivityTypeMail) {
+        CFStringRef type=UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, kUTTypePDF, NULL);
+        
+        
+        return (__bridge NSString *)(type);
+    }
+    else if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll) {
+       // return [self drawRubyViewinImage];
+    }
+    return @"";
+    
+    
+}
+
+-(UIImage*)drawRubyViewinImage{
+    UIGraphicsBeginImageContextWithOptions(self.intrinsicContentSize, NO, 2);
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+    CGRect drawRect=CGRectMake(0, 0, self.intrinsicContentSize.width, self.intrinsicContentSize.height);
+    CGPathRef path=CGPathCreateWithRect(drawRect, NULL);
+    CTFrameRef frame;
+    if (self.orientation==RubyVerticalText) {
+        NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+        CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+    }
+    else{
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+        
+    }
+    CGContextSaveGState(context);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextTranslateCTM(context, 0, -drawRect.size.height);
+    CTFrameDraw(frame, context);
+    CGContextRestoreGState(context);
+    CFRelease(frame);
+    CFRelease(path);
+    CFRelease(frameSetter);
+
+    
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *pathString=[documentsDirectory stringByAppendingPathComponent:@"test.png"];
+    NSData *imageData=UIImagePNGRepresentation(newImage);
+    [imageData writeToFile:pathString options:NSDataWritingAtomic error:nil];
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
+-(NSData*)drawRubyViewinPDF{
+    
+    CGRect drawRect=CGRectMake(0, 0, self.intrinsicContentSize.width, self.intrinsicContentSize.height);
+    NSMutableData *pdfData = [NSMutableData data];
+    CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)(pdfData));
+    CGContextRef pdfContext =CGPDFContextCreate(dataConsumer, &drawRect, NULL);
+    CGContextBeginPage(pdfContext, &drawRect);
+
+  //  CGContextSaveGState(pdfContext);
+   // CGContextScaleCTM(pdfContext, 1.0, -1.0);
+   // CGContextTranslateCTM(pdfContext, 0, -drawRect.size.height);
+    UIGraphicsPushContext(pdfContext);
+    
+    CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+    CGPathRef path=CGPathCreateWithRect(drawRect, NULL);
+    CTFrameRef frame;
+    if (self.orientation==RubyVerticalText) {
+        NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+        CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, cfDict);
+    }
+    else{
+        frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), path, NULL);
+        
+    }
+    CTFrameDraw(frame, pdfContext);
+    CFRelease(frame);
+    CFRelease(path);
+    CFRelease(frameSetter);
+    
+    
+    UIGraphicsPopContext();
+  //  CGContextRestoreGState(pdfContext);
+    CGContextEndPage(pdfContext);
+    CGPDFContextClose(pdfContext);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *pathString=[documentsDirectory stringByAppendingPathComponent:@"test.pdf"];
+    [pdfData writeToFile:pathString options:NSDataWritingAtomic error:nil];
+    CGContextRelease(pdfContext);
+    CGDataConsumerRelease(dataConsumer);
+
+    
+    return pdfData;
+}
+
 
 
 @end

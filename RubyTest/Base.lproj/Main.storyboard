@@ -82,7 +82,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="vFv-cn-DGR"/>
-                                    <barButtonItem systemItem="action" id="9h8-Ma-uxg"/>
+                                    <barButtonItem systemItem="action" id="9h8-Ma-uxg">
+                                        <connections>
+                                            <action selector="showActivityViewController:" destination="vXZ-lx-hvc" id="IQY-uM-TM6"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Yif-TB-Y4f" appends="YES" id="iz8-4v-1p7"/>

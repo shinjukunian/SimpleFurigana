@@ -36,7 +36,11 @@
     }
 
 -(void)viewDidLayoutSubviews{
-    [self.rubyView sizeToFit];
+  
+    if (![self isBeingDismissed]) {
+        [self.rubyView sizeToFit];
+
+    }
     
 }
 

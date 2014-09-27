@@ -49,14 +49,13 @@
         NSString *string=[array componentsJoinedByString:@""];
         if (string.length>0) {
             NSAttributedString *att=[[NSAttributedString alloc]initWithString:string attributes:attributes];
-        /*    [self.inputTextView setAttributedText:att];
-            [self.rubyView setStringToTransform:att];*/
-          //  [self.rubyView sizeToFit];
+            [self.inputTextView setAttributedText:att];
+            [self.rubyView setStringToTransform:att];
+           // [self.rubyView sizeToFit];
             //[self.rubyView setNeedsDisplay];
 
         }
     }
-       
     
 }
 
@@ -65,7 +64,10 @@
 
 -(void)viewDidLayoutSubviews{
    // NSLog(@"%@",NSStringFromCGSize(self.scrollView.bounds.size));
-    [self.rubyView sizeToFit];
+    if (![self presentedViewController]) {
+         [self.rubyView sizeToFit];
+    }
+   
    }
 
 
@@ -76,7 +78,12 @@
 }
 
 
-
+-(IBAction)showActivityViewController:(UIBarButtonItem*)sender{
+    
+    
+    UIActivityViewController *activity=[[UIActivityViewController alloc]initWithActivityItems:@[self.rubyView] applicationActivities:nil];
+    [self presentViewController:activity animated:YES completion:nil];
+}
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
  

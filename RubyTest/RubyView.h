@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 @class ViewController;
 
-@interface RubyView : UIView
+@interface RubyView : UIView<UIActivityItemSource>
 
 
 typedef enum{
