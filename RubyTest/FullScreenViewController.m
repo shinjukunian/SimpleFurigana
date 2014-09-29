@@ -81,4 +81,22 @@
 }
 
 
+
+
+-(IBAction)showActivityViewController:(UIBarButtonItem*)sender{
+    
+    
+    UIActivityViewController *activity=[[UIActivityViewController alloc]initWithActivityItems:@[self.rubyView] applicationActivities:nil];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        activity.modalPresentationStyle=UIModalPresentationPopover;
+        activity.popoverPresentationController.barButtonItem=sender;
+    }
+    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        
+    }
+    [self presentViewController:activity animated:YES completion:nil];
+    
+}
+
 @end

@@ -193,16 +193,23 @@
 
 -(id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType{
     
-    if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll) {
+    if (activityType==UIActivityTypeMessage || activityType==UIActivityTypeSaveToCameraRoll || activityType==UIActivityTypeCopyToPasteboard || activityType==UIActivityTypeAirDrop) {
         return [self drawRubyViewinImage];
     }
    else if (activityType==UIActivityTypeMail) {
         return [self drawRubyViewinPDF];
     }
-   else{
+    
+   else if(activityType==UIActivityTypePrint){
+       
+        return [self drawPDFPagesForPaper:CGRectInfinite];
+   }
+    
+    else {
         return nil;
    }
-  
+    
+ 
 }
 
 -(id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController{
@@ -212,12 +219,11 @@
 
 -(NSString*)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(NSString *)activityType{
     
-    if (activityType==UIActivityTypeMail) {
+    if (activityType==UIActivityTypeMail || activityType== UIActivityTypePrint) {
  
         return @"com.adobe.pdf";
     }
-    else if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll) {
-       // return [self drawRubyViewinImage];
+    else if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll || activityType==UIActivityTypeCopyToPasteboard || activityType==UIActivityTypeAirDrop) {
     }
     return @"";
     
@@ -225,6 +231,7 @@
 }
 
 -(UIImage*)drawRubyViewinImage{
+    
     UIGraphicsBeginImageContextWithOptions(self.intrinsicContentSize, NO, 2);
     CGContextRef context=UIGraphicsGetCurrentContext();
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
@@ -253,13 +260,6 @@
     
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-  /*
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *pathString=[documentsDirectory stringByAppendingPathComponent:@"test.png"];
-    NSData *imageData=UIImagePNGRepresentation(newImage);
-    [imageData writeToFile:pathString options:NSDataWritingAtomic error:nil];
-   */
     UIGraphicsEndImageContext();
     return newImage;
 }
@@ -272,12 +272,7 @@
     CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)(pdfData));
     CGContextRef pdfContext =CGPDFContextCreate(dataConsumer, &drawRect, NULL);
     CGContextBeginPage(pdfContext, &drawRect);
-
-  //  CGContextSaveGState(pdfContext);
-   // CGContextScaleCTM(pdfContext, 1.0, -1.0);
-   // CGContextTranslateCTM(pdfContext, 0, -drawRect.size.height);
     UIGraphicsPushContext(pdfContext);
-    
     CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
     CGPathRef path=CGPathCreateWithRect(drawRect, NULL);
     CTFrameRef frame;
@@ -297,7 +292,7 @@
     
     
     UIGraphicsPopContext();
-  //  CGContextRestoreGState(pdfContext);
+ 
     CGContextEndPage(pdfContext);
     CGPDFContextClose(pdfContext);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -310,6 +305,87 @@
     
     return pdfData;
 }
+
+
+-(NSData*)drawPDFPagesForPaper:(CGRect)paper{
+    
+    CGRect drawRect;
+    CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
+    NSUInteger numberOfPages=0;
+    NSMutableArray *pageRanges=[NSMutableArray array];
+    if (self.orientation==RubyHorizontalText) {
+        drawRect=CGRectMake(0, 0, 595, 842);
+        drawRect=CGRectInset(drawRect, 40, 40);
+        CGSize constraints=CGSizeMake(drawRect.size.width,drawRect.size.height);
+        CFRange fitrange=CFRangeMake(0, 0);
+        NSUInteger length=CFAttributedStringGetLength(self.rubyString);
+        CFRange stringRange=CFRangeMake(0, length);
+        while (fitrange.location+fitrange.length<length) {
+            CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, stringRange, NULL, constraints, &fitrange);
+            numberOfPages+=1;
+            stringRange.location=fitrange.location+fitrange.length;
+            stringRange.length=length-stringRange.location;
+            [pageRanges addObject:[NSValue valueWithRange:NSMakeRange(fitrange.location, fitrange.length)]];
+        }
+        
+    }
+    else if(self.orientation==RubyVerticalText){
+        drawRect=CGRectMake(0, 0, 842,595);
+        drawRect=CGRectInset(drawRect, 40, 40);
+        NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+        CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+        CGSize constraints=CGSizeMake(drawRect.size.width,drawRect.size.height);
+        CFRange fitrange=CFRangeMake(0, 0);
+        NSUInteger length=CFAttributedStringGetLength(self.rubyString);
+        CFRange stringRange=CFRangeMake(0, length);
+
+        while (fitrange.location+fitrange.length<length) {
+            CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, stringRange, cfDict, constraints, &fitrange);
+            numberOfPages+=1;
+            stringRange.location=fitrange.location+fitrange.length;
+            stringRange.length=length-stringRange.location;
+            [pageRanges addObject:[NSValue valueWithRange:NSMakeRange(fitrange.location, fitrange.length)]];
+        }
+    }
+   
+    NSMutableData *pdfData = [NSMutableData data];
+    UIGraphicsBeginPDFContextToData(pdfData, drawRect, nil);
+    CGContextRef pdfContext=UIGraphicsGetCurrentContext();
+    CGContextSetTextMatrix(pdfContext, CGAffineTransformIdentity);
+        for (NSUInteger i=0; i<numberOfPages; i++) {
+        NSRange range=[[pageRanges objectAtIndex:i]rangeValue];
+        UIGraphicsBeginPDFPage();
+        CGPathRef path=CGPathCreateWithRect(drawRect, NULL);
+        CTFrameRef frame;
+        if (self.orientation==RubyVerticalText) {
+            NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};
+            CFDictionaryRef cfDict=(__bridge CFDictionaryRef)(dict);
+            frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(range.location, range.length), path, cfDict);
+        }
+        else{
+            frame=CTFramesetterCreateFrame(frameSetter, CFRangeMake(range.location,range.length), path, NULL);
+        
+        }
+        CGContextSaveGState(pdfContext);
+        CGContextScaleCTM(pdfContext, 1.0, -1.0);
+        CGContextTranslateCTM(pdfContext, 0, -drawRect.size.height);
+        CTFrameDraw(frame, pdfContext);
+        CGContextRestoreGState(pdfContext);
+        CFRelease(frame);
+        CFRelease(path);
+    
+    
+    }
+    UIGraphicsEndPDFContext();
+    CFRelease(frameSetter);
+   // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+   // NSString *documentsDirectory = [paths objectAtIndex:0];
+   // NSString *pathString=[documentsDirectory stringByAppendingPathComponent:@"test.pdf"];
+    //[pdfData writeToFile:pathString options:NSDataWritingAtomic error:nil];
+
+    return pdfData;
+}
+
 
 
 

@@ -17,21 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
                                 <rect key="frame" x="16" y="167" width="568" height="381"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
                                         <rect key="frame" x="0.0" y="0.0" width="568" height="345"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="345" placeholder="YES" id="CuK-ja-mox"/>
                                             <constraint firstAttribute="height" constant="345" placeholder="YES" id="c1K-P8-fKY"/>
                                             <constraint firstAttribute="width" constant="568" placeholder="YES" id="wJm-7c-RgM"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="CuK-ja-mox"/>
                                                 <exclude reference="c1K-P8-fKY"/>
                                                 <exclude reference="wJm-7c-RgM"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="CuK-ja-mox"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -66,9 +73,6 @@
                                         <exclude reference="nNn-ct-fgx"/>
                                         <exclude reference="uJC-iw-v2x"/>
                                     </mask>
-                                </variation>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="16" y="203" width="568" height="545"/>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
@@ -294,7 +298,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="V2D-Zo-aV8"/>
-                                    <barButtonItem systemItem="action" id="tvt-PA-5h5"/>
+                                    <barButtonItem systemItem="action" id="tvt-PA-5h5">
+                                        <connections>
+                                            <action selector="showActivityViewController:" destination="biB-yU-KlY" id="XJb-vv-Xlp"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

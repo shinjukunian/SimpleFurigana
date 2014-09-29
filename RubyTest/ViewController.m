@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *input=@"神戸市長田区で行方不明の市立名倉小1年、生田美玲さんとみられる遺体が見つかった事件。遺体を入れたポリ袋は美玲さん宅からわずか100メートルの雑木林の草むらに無造作に捨てられていたが、兵庫県警は複数回周囲を捜索しながら、袋を発見できなかった。現場は住宅街に近く、車では行けない場所。大胆な犯行に不安が広がる。\r　県警はこれまで大量の捜査員で美玲さん宅周辺の茂みや川を連日捜索。ところが、県警は雑木林を捜索エリアに指定し、17日に隣接する空き家を調査するなど何度も周囲を調べながら、袋のあった場所は未確認だった。\r　23日の捜索で異臭に気付いた捜査員が腰丈の草むらから袋を発見。袋は厳重に包まれてはいたが、狭い範囲に無造作に置かれ、埋めたり隠したりした形跡もなかった。\r　遺棄現場は地元の人でも分かりにくい場所で、人通りはほとんどない。ただ車が入れる道はない上、住宅街ですぐ裏には高層マンションも建つ。県警は徒歩で複数の袋を気付かれずに捨てるのは困難とみられることから、土地勘がある人物の関与を疑っている。\r　遺体は裸で、頭、胴体、両足が切断され、衣服や下着とともに数個の袋に入っていた。腰の部分は別の場所にあるとみられ、まだ見つかっていない。猟奇的な犯行に、県警は不審者情報を確認するなどして、容疑者特定に全力を挙げている。";
+    NSString *input=@"神戸市長田区で行方不明の市立名倉小1年、生田美玲さんとみられる遺体が見つかった事件。遺体を入れたポリ袋は美玲さん宅からわずか100メートルの雑木林の草むらに無造作に捨てられていたが、兵庫県警は複数回周囲を捜索しながら、袋を発見できなかった。現場は住宅街に近く、車では行けない場所。大胆な犯行に不安が広がる。\r　県警はこれまで大量の捜査員で美玲さん宅周辺の茂みや川を連日捜索。ところが、県警は雑木林を捜索エリアに指定し、17日に隣接する空き家を調査するなど何度も周囲を調べながら、袋のあった場所は未確認だった。\r　23日の捜索で異臭に気付いた捜査員が腰丈の草むらから袋を発見。袋は厳重に包まれてはいたが、狭い範囲に無造作に置かれ、埋めたり隠したりした形跡もなかった。\r　遺棄現場は地元の人でも分かりにくい場所で、人通りはほとんどない。ただ車が入れる道はない上、住宅街ですぐ裏には高層マンションも建つ。県警は徒歩で複数の袋を気付かれずに捨てるのは困難とみられることから、土地勘がある人物の関与を疑っている。\r　遺体は裸で、頭、胴体、両足が切断され、衣服や下着とともに数個の袋に入っていた。腰の部分は別の場所にあるとみられ、まだ見つかっていない。猟奇的な犯行に、県警は不審者情報を確認するなどして、容疑者特定に全力を挙げている。神戸市長田区で行方不明の市立名倉小1年、生田美玲さんとみられる遺体が見つかった事件。遺体を入れたポリ袋は美玲さん宅からわずか100メートルの雑木林の草むらに無造作に捨てられていたが、兵庫県警は複数回周囲を捜索しながら、袋を発見できなかった。現場は住宅街に近く、車では行けない場所。大胆な犯行に不安が広がる。\r　県警はこれまで大量の捜査員で美玲さん宅周辺の茂みや川を連日捜索。ところが、県警は雑木林を捜索エリアに指定し、17日に隣接する空き家を調査するなど何度も周囲を調べながら、袋のあった場所は未確認だった。\r　23日の捜索で異臭に気付いた捜査員が腰丈の草むらから袋を発見。袋は厳重に包まれてはいたが、狭い範囲に無造作に置かれ、埋めたり隠したりした形跡もなかった。\r　遺棄現場は地元の人でも分かりにくい場所で、人通りはほとんどない。ただ車が入れる道はない上、住宅街ですぐ裏には高層マンションも建つ。県警は徒歩で複数の袋を気付かれずに捨てるのは困難とみられることから、土地勘がある人物の関与を疑っている。\r　遺体は裸で、頭、胴体、両足が切断され、衣服や下着とともに数個の袋に入っていた。腰の部分は別の場所にあるとみられ、まだ見つかっていない。猟奇的な犯行に、県警は不審者情報を確認するなどして、容疑者特定に全力を挙げている。";
    
     attributes=@{NSFontAttributeName:[UIFont systemFontOfSize:20]};
     
@@ -76,7 +76,16 @@
     
     
     UIActivityViewController *activity=[[UIActivityViewController alloc]initWithActivityItems:@[self.rubyView] applicationActivities:nil];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        activity.modalPresentationStyle=UIModalPresentationPopover;
+        activity.popoverPresentationController.barButtonItem=sender;
+    }
+    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+       
+    }
     [self presentViewController:activity animated:YES completion:nil];
+
 }
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
@@ -155,16 +164,23 @@
         fullScreen.orientation=self.rubyView.orientation;
                
     }
-    
-    
+  
     
 }
 
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    
-    [self.rubyView sizeToFit];
-    [self.rubyView setNeedsDisplay];
+    if (![self presentedViewController]){
+        [self.rubyView sizeToFit];
+        [self.rubyView setNeedsDisplay];
+    }
+    else if ([self presentedViewController]){
+        FullScreenViewController *fullScreen=(FullScreenViewController*)[self presentedViewController];
+        [fullScreen.rubyView sizeToFit];
+        [fullScreen.rubyView setNeedsDisplay];
+
+    }
+        
 }
 
 
