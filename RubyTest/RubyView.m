@@ -22,11 +22,8 @@
 // inspired by http://dev.classmethod.jp/references/ios8-ctrubyannotationref/
 
 
-
-
-
 -(CFAttributedStringRef)furiganaAttributedString:(NSAttributedString*) string{
-    
+   
     
     if (self.type==RubyTypeFurigana) {
         
@@ -216,10 +213,8 @@
 -(NSString*)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(NSString *)activityType{
     
     if (activityType==UIActivityTypeMail) {
-        CFStringRef type=UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, kUTTypePDF, NULL);
-        
-        
-        return (__bridge NSString *)(type);
+ 
+        return @"com.adobe.pdf";
     }
     else if (activityType==UIActivityTypeMessage|| activityType==UIActivityTypeSaveToCameraRoll) {
        // return [self drawRubyViewinImage];
@@ -258,11 +253,13 @@
     
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+  /*
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *pathString=[documentsDirectory stringByAppendingPathComponent:@"test.png"];
     NSData *imageData=UIImagePNGRepresentation(newImage);
     [imageData writeToFile:pathString options:NSDataWritingAtomic error:nil];
+   */
     UIGraphicsEndImageContext();
     return newImage;
 }

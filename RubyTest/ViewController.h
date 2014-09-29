@@ -14,7 +14,7 @@
 @property IBOutlet UITextView *inputTextView;
 @property IBOutlet UIScrollView *scrollView;
 @property IBOutlet RubyView *rubyView;
-
+@property NSString *inputString;
 
 @end
 

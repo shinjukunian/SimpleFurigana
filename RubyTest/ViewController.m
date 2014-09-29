@@ -41,21 +41,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
-  //  [self.rubyView sizeToFit];
-    UIPasteboard *pasteBoard=[UIPasteboard generalPasteboard];
-    if ([pasteBoard containsPasteboardTypes:UIPasteboardTypeListString]) {
-        NSArray *array=[pasteBoard strings];
-        NSString *string=[array componentsJoinedByString:@""];
-        if (string.length>0) {
-            NSAttributedString *att=[[NSAttributedString alloc]initWithString:string attributes:attributes];
-            [self.inputTextView setAttributedText:att];
-            [self.rubyView setStringToTransform:att];
-           // [self.rubyView sizeToFit];
-            //[self.rubyView setNeedsDisplay];
-
-        }
-    }
     
 }
 
@@ -64,7 +49,17 @@
 
 -(void)viewDidLayoutSubviews{
    // NSLog(@"%@",NSStringFromCGSize(self.scrollView.bounds.size));
+    
+    
     if (![self presentedViewController]) {
+        if (self.inputString.length>0) {
+            NSAttributedString *att=[[NSAttributedString alloc]initWithString:self.inputString attributes:attributes];
+            [self.inputTextView setAttributedText:att];
+            [self.rubyView setStringToTransform:att];
+            self.inputString=@"";
+            [self.rubyView setNeedsDisplay];
+            
+        }
          [self.rubyView sizeToFit];
     }
    
@@ -74,7 +69,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
    
-   // [self.rubyView setNeedsDisplay];
 }
 
 
@@ -164,6 +158,13 @@
     
     
     
+}
+
+
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    [self.rubyView sizeToFit];
+    [self.rubyView setNeedsDisplay];
 }
 
 
