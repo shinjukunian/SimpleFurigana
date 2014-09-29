@@ -1,0 +1,21 @@
+
+/* Class = "IBUIBarButtonItem"; title = "Hide Controls"; ObjectID = "3jK-xC-ijA"; */
+"3jK-xC-ijA.title" = "Hide Controls";
+
+/* Class = "IBUISegmentedControl"; Aqr-mU-vhv.segmentTitles[0] = "横書き"; ObjectID = "Aqr-mU-vhv"; */
+"Aqr-mU-vhv.segmentTitles[0]" = "横書き";
+
+/* Class = "IBUISegmentedControl"; Aqr-mU-vhv.segmentTitles[1] = "縦書き"; ObjectID = "Aqr-mU-vhv"; */
+"Aqr-mU-vhv.segmentTitles[1]" = "縦書き";
+
+/* Class = "IBUITabBarItem"; title = "漢字"; ObjectID = "RzY-mY-BBB"; */
+"RzY-mY-BBB.title" = "漢字";
+
+/* Class = "IBUISegmentedControl"; fJy-Hf-Yxz.segmentTitles[0] = "漢字"; ObjectID = "fJy-Hf-Yxz"; */
+"fJy-Hf-Yxz.segmentTitles[0]" = "漢字";
+
+/* Class = "IBUISegmentedControl"; fJy-Hf-Yxz.segmentTitles[1] = "ひらがな"; ObjectID = "fJy-Hf-Yxz"; */
+"fJy-Hf-Yxz.segmentTitles[1]" = "ひらがな";
+
+/* Class = "IBUISegmentedControl"; fJy-Hf-Yxz.segmentTitles[2] = "ふりがな"; ObjectID = "fJy-Hf-Yxz"; */
+"fJy-Hf-Yxz.segmentTitles[2]" = "ふりがな";

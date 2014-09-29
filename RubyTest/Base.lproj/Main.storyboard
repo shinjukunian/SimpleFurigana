@@ -29,9 +29,9 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-Hf-Yxz">
                                 <rect key="frame" x="16" y="20" width="568" height="29"/>
                                 <segments>
-                                    <segment title="漢字"/>
-                                    <segment title="ひらがな"/>
-                                    <segment title="ふりがな"/>
+                                    <segment title="Kanji"/>
+                                    <segment title="Hiragana"/>
+                                    <segment title="Furigana"/>
                                 </segments>
                                 <connections>
                                     <action selector="transliterationMethodDidChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="zYV-St-nul"/>
@@ -54,6 +54,9 @@
                                 <variation key="heightClass=regular" ambiguous="YES">
                                     <rect key="frame" x="16" y="203" width="568" height="545"/>
                                 </variation>
+                                <variation key="widthClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="16" y="203" width="768" height="345"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="16" y="203" width="368" height="545"/>
                                 </variation>
@@ -65,8 +68,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Aqr-mU-vhv">
                                 <rect key="frame" x="16" y="56" width="568" height="29"/>
                                 <segments>
-                                    <segment title="横書き"/>
-                                    <segment title="縦書き"/>
+                                    <segment title="Horizontal"/>
+                                    <segment title="Vertical"/>
                                 </segments>
                                 <connections>
                                     <action selector="writingOrientationDidChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="DSZ-Qh-qxV"/>
