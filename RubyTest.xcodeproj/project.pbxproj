@@ -14,8 +14,6 @@
 		B70A5BA219CB041100079CDF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B70A5BA119CB041100079CDF /* Images.xcassets */; };
 		B70A5BA519CB041100079CDF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70A5BA319CB041100079CDF /* LaunchScreen.xib */; };
 		B72777DF19CB15EC000C973B /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
-		B72B24F419D970AE006CDD0C /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
-		B73E68DB19CD538000418974 /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
 		B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
@@ -46,12 +44,10 @@
 		B70A5BA419CB041100079CDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B72777DD19CB15EC000C973B /* NSString+Japanese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Japanese.h"; sourceTree = "<group>"; };
 		B72777DE19CB15EC000C973B /* NSString+Japanese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Japanese.m"; sourceTree = "<group>"; };
-		B72B24CB19D96C72006CDD0C /* RubyViewOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyViewOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B737579F19D92EA9008CDC85 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		B73757A019D92EA9008CDC85 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B73757A219D92EAF008CDC85 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		B73757A319D92EAF008CDC85 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		B73E68B019CD36CE00418974 /* RubyOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76D29C319D00EFC00CA3696 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
 		B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
 		B7E18D0619CB0A99005CEB0B /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
@@ -60,20 +56,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		B70A5B8E19CB041100079CDF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B72B24C819D96C72006CDD0C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B73E68AD19CD36CE00418974 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -97,8 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				B70A5B9119CB041100079CDF /* SimpleFurigana.app */,
-				B73E68B019CD36CE00418974 /* RubyOSX.app */,
-				B72B24CB19D96C72006CDD0C /* RubyViewOSX.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,40 +132,6 @@
 			productReference = B70A5B9119CB041100079CDF /* SimpleFurigana.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B72B24CA19D96C72006CDD0C /* RubyViewOSX */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B72B24E819D96C73006CDD0C /* Build configuration list for PBXNativeTarget "RubyViewOSX" */;
-			buildPhases = (
-				B72B24C719D96C72006CDD0C /* Sources */,
-				B72B24C819D96C72006CDD0C /* Frameworks */,
-				B72B24C919D96C72006CDD0C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RubyViewOSX;
-			productName = RubyViewOSX;
-			productReference = B72B24CB19D96C72006CDD0C /* RubyViewOSX.app */;
-			productType = "com.apple.product-type.application";
-		};
-		B73E68AF19CD36CE00418974 /* RubyOSX */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B73E68CA19CD36CE00418974 /* Build configuration list for PBXNativeTarget "RubyOSX" */;
-			buildPhases = (
-				B73E68AC19CD36CE00418974 /* Sources */,
-				B73E68AD19CD36CE00418974 /* Frameworks */,
-				B73E68AE19CD36CE00418974 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RubyOSX;
-			productName = RubyOSX;
-			productReference = B73E68B019CD36CE00418974 /* RubyOSX.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,12 +143,6 @@
 				TargetAttributes = {
 					B70A5B9019CB041100079CDF = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					B72B24CA19D96C72006CDD0C = {
-						CreatedOnToolsVersion = 6.0.1;
-					};
-					B73E68AF19CD36CE00418974 = {
-						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
 			};
@@ -220,8 +160,6 @@
 			projectRoot = "";
 			targets = (
 				B70A5B9019CB041100079CDF /* SimpleFurigana */,
-				B73E68AF19CD36CE00418974 /* RubyOSX */,
-				B72B24CA19D96C72006CDD0C /* RubyViewOSX */,
 			);
 		};
 /* End PBXProject section */
@@ -234,20 +172,6 @@
 				B70A5BA019CB041100079CDF /* Main.storyboard in Resources */,
 				B70A5BA519CB041100079CDF /* LaunchScreen.xib in Resources */,
 				B70A5BA219CB041100079CDF /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B72B24C919D96C72006CDD0C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B73E68AE19CD36CE00418974 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,22 +188,6 @@
 				B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */,
 				B70A5B9719CB041100079CDF /* main.m in Sources */,
 				B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B72B24C719D96C72006CDD0C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B72B24F419D970AE006CDD0C /* NSString+Japanese.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B73E68AC19CD36CE00418974 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B73E68DB19CD538000418974 /* NSString+Japanese.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,72 +315,6 @@
 			};
 			name = Release;
 		};
-		B72B24E919D96C73006CDD0C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = RubyViewOSX/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		B72B24EA19D96C73006CDD0C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = RubyViewOSX/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		B73E68CB19CD36CE00418974 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = RubyOSX/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		B73E68CC19CD36CE00418974 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = RubyOSX/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -490,24 +332,6 @@
 			buildConfigurations = (
 				B70A5BB519CB041100079CDF /* Debug */,
 				B70A5BB619CB041100079CDF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B72B24E819D96C73006CDD0C /* Build configuration list for PBXNativeTarget "RubyViewOSX" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B72B24E919D96C73006CDD0C /* Debug */,
-				B72B24EA19D96C73006CDD0C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B73E68CA19CD36CE00418974 /* Build configuration list for PBXNativeTarget "RubyOSX" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B73E68CB19CD36CE00418974 /* Debug */,
-				B73E68CC19CD36CE00418974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
