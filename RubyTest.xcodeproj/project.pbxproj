@@ -15,10 +15,6 @@
 		B70A5BA519CB041100079CDF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70A5BA319CB041100079CDF /* LaunchScreen.xib */; };
 		B72777DF19CB15EC000C973B /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = B72777DE19CB15EC000C973B /* NSString+Japanese.m */; };
 		B761ADF219DA55BB00862DEB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B761ADF119DA55BB00862DEB /* README.md */; };
-		B761ADF719DA587100862DEB /* kanji.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADF319DA587100862DEB /* kanji.png */; };
-		B761ADF819DA587100862DEB /* furiganaVertical.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADF419DA587100862DEB /* furiganaVertical.png */; };
-		B761ADF919DA587100862DEB /* furigana.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADF519DA587100862DEB /* furigana.png */; };
-		B761ADFA19DA587100862DEB /* hiragana.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADF619DA587100862DEB /* hiragana.png */; };
 		B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
@@ -54,10 +50,6 @@
 		B73757A219D92EAF008CDC85 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		B73757A319D92EAF008CDC85 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B761ADF119DA55BB00862DEB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B761ADF319DA587100862DEB /* kanji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kanji.png; sourceTree = "<group>"; };
-		B761ADF419DA587100862DEB /* furiganaVertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = furiganaVertical.png; sourceTree = "<group>"; };
-		B761ADF519DA587100862DEB /* furigana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = furigana.png; sourceTree = "<group>"; };
-		B761ADF619DA587100862DEB /* hiragana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hiragana.png; sourceTree = "<group>"; };
 		B76D29C319D00EFC00CA3696 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
 		B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
 		B7E18D0619CB0A99005CEB0B /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
@@ -79,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				B761ADF119DA55BB00862DEB /* README.md */,
-				B761ADF019DA53BA00862DEB /* images */,
 				B72777DD19CB15EC000C973B /* NSString+Japanese.h */,
 				B72777DE19CB15EC000C973B /* NSString+Japanese.m */,
 				B70A5B9319CB041100079CDF /* RubyTest */,
@@ -121,18 +112,6 @@
 				B70A5B9619CB041100079CDF /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B761ADF019DA53BA00862DEB /* images */ = {
-			isa = PBXGroup;
-			children = (
-				B761ADF319DA587100862DEB /* kanji.png */,
-				B761ADF419DA587100862DEB /* furiganaVertical.png */,
-				B761ADF519DA587100862DEB /* furigana.png */,
-				B761ADF619DA587100862DEB /* hiragana.png */,
-			);
-			name = images;
-			path = RubyTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,11 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B761ADF919DA587100862DEB /* furigana.png in Resources */,
 				B70A5BA019CB041100079CDF /* Main.storyboard in Resources */,
-				B761ADF819DA587100862DEB /* furiganaVertical.png in Resources */,
-				B761ADFA19DA587100862DEB /* hiragana.png in Resources */,
-				B761ADF719DA587100862DEB /* kanji.png in Resources */,
 				B70A5BA519CB041100079CDF /* LaunchScreen.xib in Resources */,
 				B70A5BA219CB041100079CDF /* Images.xcassets in Resources */,
 			);
