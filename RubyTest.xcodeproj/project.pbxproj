@@ -18,6 +18,7 @@
 		B761ADED19DA53AF00862DEB /* kanji.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADE919DA53AF00862DEB /* kanji.png */; };
 		B761ADEE19DA53AF00862DEB /* furiganaVertical.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADEA19DA53AF00862DEB /* furiganaVertical.png */; };
 		B761ADEF19DA53AF00862DEB /* hiragana.png in Resources */ = {isa = PBXBuildFile; fileRef = B761ADEB19DA53AF00862DEB /* hiragana.png */; };
+		B761ADF219DA55BB00862DEB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B761ADF119DA55BB00862DEB /* README.md */; };
 		B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */; };
 		B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E18D0719CB0A99005CEB0B /* RubyView.m */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		B761ADE919DA53AF00862DEB /* kanji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kanji.png; sourceTree = "<group>"; };
 		B761ADEA19DA53AF00862DEB /* furiganaVertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = furiganaVertical.png; sourceTree = "<group>"; };
 		B761ADEB19DA53AF00862DEB /* hiragana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hiragana.png; sourceTree = "<group>"; };
+		B761ADF119DA55BB00862DEB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B76D29C319D00EFC00CA3696 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
 		B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
 		B7E18D0619CB0A99005CEB0B /* RubyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyView.h; sourceTree = "<group>"; };
@@ -76,6 +78,8 @@
 		B70A5B8819CB041100079CDF = {
 			isa = PBXGroup;
 			children = (
+				B761ADF119DA55BB00862DEB /* README.md */,
+				B761ADF019DA53BA00862DEB /* images */,
 				B72777DD19CB15EC000C973B /* NSString+Japanese.h */,
 				B72777DE19CB15EC000C973B /* NSString+Japanese.m */,
 				B70A5B9319CB041100079CDF /* RubyTest */,
@@ -105,7 +109,6 @@
 				B76D29C419D00EFC00CA3696 /* FullScreenViewController.m */,
 				B70A5BA119CB041100079CDF /* Images.xcassets */,
 				B70A5BA319CB041100079CDF /* LaunchScreen.xib */,
-				B761ADF019DA53BA00862DEB /* images */,
 				B70A5B9419CB041100079CDF /* Supporting Files */,
 			);
 			path = RubyTest;
@@ -129,6 +132,7 @@
 				B761ADEB19DA53AF00862DEB /* hiragana.png */,
 			);
 			name = images;
+			path = RubyTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +213,7 @@
 				B72777DF19CB15EC000C973B /* NSString+Japanese.m in Sources */,
 				B70A5B9D19CB041100079CDF /* ViewController.m in Sources */,
 				B70A5B9A19CB041100079CDF /* AppDelegate.m in Sources */,
+				B761ADF219DA55BB00862DEB /* README.md in Sources */,
 				B7E18D0819CB0A99005CEB0B /* RubyView.m in Sources */,
 				B70A5B9719CB041100079CDF /* main.m in Sources */,
 				B76D29C519D00EFC00CA3696 /* FullScreenViewController.m in Sources */,
