@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-K2-7Dw">
                                 <rect key="frame" x="16" y="167" width="568" height="381"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aae-Ss-w9Z" customClass="RubyView">
                                         <rect key="frame" x="0.0" y="0.0" width="568" height="345"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -54,36 +54,13 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="aae-Ss-w9Z" secondAttribute="bottom" constant="36" placeholder="YES" id="9EQ-RH-tZF"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="top" placeholder="YES" id="aWA-5Q-Oyn"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="centerY" secondItem="dfs-K2-7Dw" secondAttribute="centerY" placeholder="YES" id="bey-eI-8YL"/>
-                                    <constraint firstAttribute="trailing" secondItem="aae-Ss-w9Z" secondAttribute="trailing" constant="-200" placeholder="YES" id="eRk-YF-1jI"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="leading" secondItem="dfs-K2-7Dw" secondAttribute="leading" placeholder="YES" id="fqa-JB-1d7"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="centerX" secondItem="dfs-K2-7Dw" secondAttribute="centerX" placeholder="YES" id="kID-ua-5JY"/>
-                                    <constraint firstAttribute="trailing" secondItem="aae-Ss-w9Z" secondAttribute="trailing" placeholder="YES" id="lRj-tl-XXi"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="top" placeholder="YES" id="nNn-ct-fgx"/>
-                                    <constraint firstAttribute="bottom" secondItem="aae-Ss-w9Z" secondAttribute="bottom" placeholder="YES" id="uJC-iw-v2x"/>
-                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="leading" secondItem="dfs-K2-7Dw" secondAttribute="leading" placeholder="YES" id="ytA-Oq-BRB"/>
+                                    <constraint firstAttribute="trailing" secondItem="aae-Ss-w9Z" secondAttribute="trailing" placeholder="YES" id="22y-n5-3v0"/>
+                                    <constraint firstAttribute="bottom" secondItem="aae-Ss-w9Z" secondAttribute="bottom" constant="36" placeholder="YES" id="9RZ-Iw-66I"/>
+                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="top" secondItem="dfs-K2-7Dw" secondAttribute="top" placeholder="YES" id="Ols-Ox-3zZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="aae-Ss-w9Z" secondAttribute="centerX" placeholder="YES" id="bZN-fZ-Ifx"/>
+                                    <constraint firstAttribute="centerY" secondItem="aae-Ss-w9Z" secondAttribute="centerY" constant="18" placeholder="YES" id="lho-Ex-52u"/>
+                                    <constraint firstItem="aae-Ss-w9Z" firstAttribute="leading" secondItem="dfs-K2-7Dw" secondAttribute="leading" placeholder="YES" id="vuz-e3-oFJ"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="bey-eI-8YL"/>
-                                        <exclude reference="eRk-YF-1jI"/>
-                                        <exclude reference="fqa-JB-1d7"/>
-                                        <exclude reference="nNn-ct-fgx"/>
-                                        <exclude reference="uJC-iw-v2x"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="9EQ-RH-tZF"/>
-                                        <include reference="bey-eI-8YL"/>
-                                        <exclude reference="eRk-YF-1jI"/>
-                                        <include reference="fqa-JB-1d7"/>
-                                        <include reference="nNn-ct-fgx"/>
-                                        <include reference="uJC-iw-v2x"/>
-                                    </mask>
-                                </variation>
                                 <variation key="widthClass=regular" ambiguous="YES">
                                     <rect key="frame" x="16" y="167" width="768" height="381"/>
                                 </variation>
