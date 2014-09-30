@@ -3,19 +3,21 @@ SimpleFurigana
 
 A Simple iPhone Application adding Ruby Characters (Furigana) to Japanese Text.
 
-This app uses CFStringTokenizer and CFStringTransform to parse Japanese text and automatically transliterates the contained Chinese characters (Kanji) into Hiragana.
+This app uses CFStringTokenizer and CFStringTransform to parse Japanese text.
 
-<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/kanjiinput.png" height="500px" />
+<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/kanjiinput.png" height="500px" align="middle" />
 
-<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/hiraganaonly.png" height="500px" />
+Chinese Characters (Kanji) are automatically transliterated into Hiragana.
+
+<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/hiraganaonly.png" height="500px" align="middle" />
 
 Text is displayed using CoreText, making use of CTRubyAnnotationRef (new in iOS8) to display Ruby Characters (Furigana) above the original Japanese text. 
 
-<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/horizontal.png" height="500px" />
+<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/horizontal.png" height="500px" align="middle" />
 
 Both horizontal (横書き) and vertical (縦書き) text layouts are supported. 
 
-<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/vertical.png" height="500px" />
+<img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/vertical.png" height="500px" align="middle" />
 
 
 
