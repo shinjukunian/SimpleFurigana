@@ -6,17 +6,16 @@
 //  Copyright (c) 2014 Morten Bertz. All rights reserved.
 //
 
-#import "RubyView.h"
+#import "RubyViewOSX.h"
 #import "NSString+Japanese.h"
 
 @import CoreText;
 
-@implementation RubyView{
+@implementation RubyViewOSX{
     CGRect printRect;
     BOOL portrait;
     NSUInteger currentPage;
     NSUInteger numberOfPages;
-    NSLayoutConstraint *heightConstraint;
     NSArray *lineRects;
     NSArray *lines;
     NSArray *lineOrigins;
@@ -100,28 +99,22 @@
 
 
 
--(NSSize)intrinsicContentSize{
+-(CGSize)sizeToFit:(CGSize)size{
     if (self.stringToTransform.length>0) {
         
         self.rubyString=[self furiganaAttributedString:self.stringToTransform];
         
-      //  [self removeConstraint:heightConstraint];
         CTFramesetterRef framesetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-        CGSize constraints=CGSizeMake(self.bounds.size.width-10, CGFLOAT_MAX);
+        
+        CGSize constraints=CGSizeMake(self.hostingScrollView.contentSize.width , CGFLOAT_MAX);
         CFRange fitrange;
         CGSize newSize=CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(self.rubyString)), NULL, constraints, &fitrange);
-        //newSize.width=size.width;
-       // self.intrinsicContentSize=newSize;
+    
         CFRelease(framesetter);
-//        heightConstraint=[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:newSize.height];
-        
-      // [self addConstraint:heightConstraint];
-        
-        
         NSLog(@"%@",NSStringFromSize(newSize));
-
-   // return CGSizeMake(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
-        return CGSizeMake(NSViewNoInstrinsicMetric, newSize.height);
+        [self.hostingScrollView.contentView setFrameSize:newSize];
+        self.sizeToFit=newSize;
+        return newSize;
     }
     else{
         return self.bounds.size;
@@ -129,12 +122,7 @@
 }
 
 
--(void)setIntrinsicContentSize:(CGSize)intrinsicContentSize{
-    
 
-
-
-}
 
 -(void)viewWillDraw{
     
@@ -289,14 +277,14 @@
         }
         
         else{
-          //  NSLog(@"%@",NSStringFromRect(self.bounds));
+            NSLog(@"%@",NSStringFromRect(dirtyRect));
             [[NSGraphicsContext currentContext] saveGraphicsState];
             CGContextRef context=[[NSGraphicsContext currentContext]graphicsPort];
             CGContextSetTextMatrix(context, CGAffineTransformIdentity);
             CGContextSetFillColorWithColor(context, [[NSColor redColor]CGColor]);
             
             CTFramesetterRef frameSetter=CTFramesetterCreateWithAttributedString(self.rubyString);
-            CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 5, 5), NULL);
+            CGPathRef path=CGPathCreateWithRect(CGRectInset(self.bounds, 0, 0), NULL);
             CTFrameRef frame;
             if (self.orientation==RubyVerticalText) {
                 NSDictionary *dict=@{(NSString *)kCTFrameProgressionAttributeName:@(kCTFrameProgressionRightToLeft)};

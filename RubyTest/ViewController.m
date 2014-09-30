@@ -76,6 +76,8 @@
     
     
     UIActivityViewController *activity=[[UIActivityViewController alloc]initWithActivityItems:@[self.rubyView] applicationActivities:nil];
+    NSArray *excludedActivities=@[UIActivityTypeAssignToContact, UIActivityTypePostToVimeo];
+    activity.excludedActivityTypes=excludedActivities;
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
         activity.modalPresentationStyle=UIModalPresentationPopover;

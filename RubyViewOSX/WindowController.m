@@ -1,20 +1,20 @@
 //
-//  RubyWindowController.m
+//  WindowController.m
 //  RubyTest
 //
-//  Created by Morten Bertz on 9/20/14.
+//  Created by Morten Bertz on 9/29/14.
 //  Copyright (c) 2014 Morten Bertz. All rights reserved.
 //
 
-#import "RubyWindowController.h"
+#import "WindowController.h"
 #import "RubyViewOSX.h"
-
-@interface RubyWindowController ()
+@interface WindowController ()
 
 @end
 
-@implementation RubyWindowController{
+@implementation WindowController{
     NSDictionary *attributes;
+
 }
 
 - (void)windowDidLoad {
@@ -24,36 +24,23 @@
     
     attributes=@{NSFontAttributeName:[NSFont systemFontOfSize:20]};
     NSAttributedString *strAttr=[[NSAttributedString alloc]initWithString:input attributes:attributes];
+    
     [self.textView.textStorage replaceCharactersInRange:NSMakeRange(0, self.textView.textStorage.length) withAttributedString:strAttr];
+   
     [self.rubyView setStringToTransform:strAttr];
     [self.rubyView setType:RubyTypeNone];
+    
     [self.rubyView setHostingScrollView:self.scrollView];
     [self.scrollView setBackgroundColor:[NSColor whiteColor]];
+    
     [self.scrollView setDrawsBackground:YES];
-    [self.rubyView invalidateIntrinsicContentSize];
-    [[self scrollView]setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.rubyView setTranslatesAutoresizingMaskIntoConstraints:YES];
+    [self.rubyView sizeToFit:self.scrollView.bounds.size];
     
     
     
 }
 
--(BOOL)validateToolbarItem:(NSToolbarItem *)theItem{
-    
-    
-    
-    return YES;
-}
 
-
-
-
-
-
-
--(void)windowDidEndLiveResize:(NSNotification *)notification{
-    [self.rubyView invalidateIntrinsicContentSize];
-}
 
 
 -(BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString{
@@ -82,7 +69,7 @@
             [self.rubyView invalidateIntrinsicContentSize];
             [self.rubyView setNeedsDisplay:YES];
             
-
+            
             
             break;
         case 2:
@@ -91,8 +78,8 @@
             [self.rubyView setNeedsDisplay:YES];
             
             break;
-
-
+            
+            
         default:
             break;
     }
@@ -120,17 +107,10 @@
             
             
             break;
-        
+            
         default:
             break;
     }
-   
-}
-
-- (IBAction)printRubyView:(id)sender {
-    NSPrintOperation *op=[NSPrintOperation printOperationWithView:self.rubyView];
-    [self.rubyView setPrintInfo:op.printInfo];
-    [op runOperation];
     
 }
 

@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RubyView : NSView
+@interface RubyViewOSX : NSView
 
 typedef enum{
     RubyTypeFuriganaRomaji,
@@ -29,10 +29,14 @@ typedef enum{
 
 @property CFAttributedStringRef rubyString;
 @property NSAttributedString *stringToTransform;
-@property CGSize intrinsicContentSize;
+@property CGSize sizeToFit;
 @property RubyType type;
 @property textOrientation orientation;
+@property (weak) NSScrollView *hostingScrollView;
 @property NSPrintInfo *printInfo;
 @property NSRange highlightRange;
+
+-(CGSize)sizeToFit:(CGSize)size;
+
 
 @end
