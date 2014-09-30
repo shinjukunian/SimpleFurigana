@@ -19,7 +19,12 @@ Both horizontal (横書き) and vertical (縦書き) text layouts are supported.
 
 <img src="https://github.com/shinjukunian/SimpleFurigana/blob/gh-pages/vertical.png" height="500px" align="middle" />
 
+Layouts can be shared and printed.
 
+Known Issues
+============
+- layouting text with Ruby characters is slow
+- CTFrameSetter, especially CTFramesetterSuggestFrameSizeWithConstraints occasionally crashes when laying out 'rubyfied' text - I believe this is due to some problems with the layout geometry. 
 
 Acknowledgements
 ================
