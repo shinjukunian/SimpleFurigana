@@ -24,7 +24,7 @@ Layouts can be shared and printed.
 Known Issues
 ============
 - layouting text with Ruby characters is slow
-- CTFrameSetter, especially CTFramesetterSuggestFrameSizeWithConstraints occasionally crashes when laying out 'rubyfied' text - I believe this is due to some problems with the layout geometry. 
+~~- CTFrameSetter, especially CTFramesetterSuggestFrameSizeWithConstraints occasionally crashes when laying out 'rubyfied' text. I believe this is due to some problems with the layout geometry. ~~ This issue has been fixed in iOS8.2. 
 
 Acknowledgements
 ================
